@@ -1,0 +1,422 @@
+[
+  {
+    "id": "mountain",
+    "filename": "mountain.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Mountain Pose (Tadasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "chair",
+    "filename": "chair.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Chair Pose (Utkatasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "forward-fold",
+    "filename": "forward-fold.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Forward Fold (Uttanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "halfway-lift",
+    "filename": "halfway-lift.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Halfway Lift (Ardha Uttanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "downward-dog",
+    "filename": "downward-dog.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Downward-Facing Dog (Adho Mukha Svanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "plank",
+    "filename": "plank.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Plank Pose (Phalakasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "chaturanga",
+    "filename": "chaturanga.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Four-Limbed Staff Pose (Chaturanga Dandasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "upward-dog",
+    "filename": "upward-dog.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Upward-Facing Dog (Urdhva Mukha Svanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "cobra",
+    "filename": "cobra.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Cobra Pose (Bhujangasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "child",
+    "filename": "child.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Child's Pose (Balasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "cat",
+    "filename": "cat.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Cat Pose (Marjaryasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "cow",
+    "filename": "cow.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Cow Pose (Bitilasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "low-lunge",
+    "filename": "low-lunge.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Low Lunge (Anjaneyasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "high-lunge",
+    "filename": "high-lunge.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating High Lunge (Ashta Chandrasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "warrior-1",
+    "filename": "warrior-1.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Warrior I (Virabhadrasana I) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "warrior-2",
+    "filename": "warrior-2.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Warrior II (Virabhadrasana II) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "warrior-3",
+    "filename": "warrior-3.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Warrior III (Virabhadrasana III) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "triangle",
+    "filename": "triangle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Triangle Pose (Trikonasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "revolved-triangle",
+    "filename": "revolved-triangle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Revolved Triangle (Parivrtta Trikonasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "side-angle",
+    "filename": "side-angle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Extended Side Angle (Utthita Parsvakonasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "revolved-side-angle",
+    "filename": "revolved-side-angle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Revolved Side Angle (Parivrtta Parsvakonasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "pyramid",
+    "filename": "pyramid.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Pyramid Pose (Parsvottanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "wide-leg-fold",
+    "filename": "wide-leg-fold.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Wide-Legged Forward Fold (Prasarita Padottanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "garland",
+    "filename": "garland.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Garland Pose (Malasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "goddess",
+    "filename": "goddess.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Goddess Pose (Utkata Konasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "tree",
+    "filename": "tree.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Tree Pose (Vrksasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "eagle",
+    "filename": "eagle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Eagle Pose (Garudasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "half-moon",
+    "filename": "half-moon.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Half Moon (Ardha Chandrasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "dancer",
+    "filename": "dancer.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Dancer Pose (Natarajasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "standing-hand-to-big-toe",
+    "filename": "standing-hand-to-big-toe.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Standing Hand to Big Toe (Utthita Hasta Padangusthasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "standing-split",
+    "filename": "standing-split.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Standing Split (Urdhva Prasarita Eka Padasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "side-lunge",
+    "filename": "side-lunge.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Side Lunge (Skandasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "gate",
+    "filename": "gate.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Gate Pose (Parighasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "chair-twist",
+    "filename": "chair-twist.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Revolved Chair (Parivrtta Utkatasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "revolved-half-moon",
+    "filename": "revolved-half-moon.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Revolved Half Moon (Parivrtta Ardha Chandrasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "crow",
+    "filename": "crow.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Crow Pose (Bakasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "side-crow",
+    "filename": "side-crow.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Side Crow (Parsva Bakasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "eight-angle",
+    "filename": "eight-angle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Eight-Angle Pose (Astavakrasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "firefly",
+    "filename": "firefly.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Firefly Pose (Titibasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "peacock",
+    "filename": "peacock.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Peacock Pose (Mayurasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "scale",
+    "filename": "scale.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Scale Pose (Tolasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "forearm-stand",
+    "filename": "forearm-stand.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Forearm Stand (Pincha Mayurasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "handstand",
+    "filename": "handstand.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Handstand (Adho Mukha Vrksasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "headstand",
+    "filename": "headstand.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Headstand (Sirsasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "shoulderstand",
+    "filename": "shoulderstand.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Shoulderstand (Salamba Sarvangasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "plow",
+    "filename": "plow.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Plow Pose (Halasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "ear-pressure",
+    "filename": "ear-pressure.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Ear Pressure Pose (Karnapidasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "legs-up-wall",
+    "filename": "legs-up-wall.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Legs-Up-The-Wall (Viparita Karani) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "bridge",
+    "filename": "bridge.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Bridge Pose (Setu Bandha Sarvangasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "wheel",
+    "filename": "wheel.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Wheel Pose (Urdhva Dhanurasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "camel",
+    "filename": "camel.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Camel Pose (Ustrasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "bow",
+    "filename": "bow.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Bow Pose (Dhanurasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "locust",
+    "filename": "locust.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Locust Pose (Salabhasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "crocodile",
+    "filename": "crocodile.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Crocodile Pose (Makarasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "sphinx",
+    "filename": "sphinx.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Sphinx Pose (Salamba Bhujangasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "fish",
+    "filename": "fish.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Fish Pose (Matsyasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "pigeon",
+    "filename": "pigeon.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Pigeon Pose (Eka Pada Rajakapotasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "lizard",
+    "filename": "lizard.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Lizard Pose (Utthan Pristhasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "frog",
+    "filename": "frog.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Frog Pose (Mandukasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "rabbit",
+    "filename": "rabbit.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Rabbit Pose (Sasangasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "easy-seated",
+    "filename": "easy-seated.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Easy Pose (Sukhasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "lotus",
+    "filename": "lotus.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Lotus Pose (Padmasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "half-lotus",
+    "filename": "half-lotus.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Half Lotus (Ardha Padmasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "accomplished",
+    "filename": "accomplished.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Accomplished Pose (Siddhasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "thunderbolt",
+    "filename": "thunderbolt.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Thunderbolt Pose (Vajrasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "staff",
+    "filename": "staff.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Staff Pose (Dandasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "seated-forward-fold",
+    "filename": "seated-forward-fold.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Seated Forward Fold (Paschimottanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "head-to-knee",
+    "filename": "head-to-knee.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Head-to-Knee Pose (Janu Sirsasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "wide-angle",
+    "filename": "wide-angle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Seated Wide Angle (Upavistha Konasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "bound-angle",
+    "filename": "bound-angle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Bound Angle (Baddha Konasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "cow-face",
+    "filename": "cow-face.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Cow Face (Gomukhasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "fire-log",
+    "filename": "fire-log.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Fire Log (Agnistambhasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "seated-twist",
+    "filename": "seated-twist.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Seated Twist (Ardha Matsyendrasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "marichi",
+    "filename": "marichi.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Marichi's Pose (Marichyasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "boat",
+    "filename": "boat.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Boat Pose (Navasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "reverse-plank",
+    "filename": "reverse-plank.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Reverse Plank (Purvottanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "reclined-hand-to-big-toe",
+    "filename": "reclined-hand-to-big-toe.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Reclined Hand to Big Toe (Supta Padangusthasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "supine-bound-angle",
+    "filename": "supine-bound-angle.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Supine Bound Angle (Supta Baddha Konasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "happy-baby",
+    "filename": "happy-baby.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Happy Baby (Ananda Balasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "wind-relieving",
+    "filename": "wind-relieving.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Wind-Relieving Pose (Pavanamuktasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "supine-twist",
+    "filename": "supine-twist.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Supine Twist (Jathara Parivartanasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "corpse",
+    "filename": "corpse.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Corpse Pose (Savasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "reclined-hero",
+    "filename": "reclined-hero.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Reclined Hero (Supta Virasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  },
+  {
+    "id": "heron",
+    "filename": "heron.jpg",
+    "prompt": "Photorealistic studio photo of a professional yoga instructor demonstrating Heron Pose (Krounchasana) on a neutral linen backdrop, soft diffused light, full body in frame, clear alignment, high-end wellness editorial style, subtle fuchsia and lavender accents."
+  }
+]

@@ -1,0 +1,1623 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Starter flashcard dataset for yoga pose memorization and teaching practice.",
+  "fields": [
+    "id",
+    "englishName",
+    "sanskritName",
+    "category",
+    "difficulty",
+    "breath.enter",
+    "breath.hold",
+    "breath.exit",
+    "alignmentCues",
+    "teachingCues.general",
+    "teachingCues.beginner",
+    "teachingCues.limitedMobility",
+    "commonMistakes",
+    "image.filename",
+    "image.prompt"
+  ],
+  "poses": [
+    {
+      "id": "mountain",
+      "englishName": "Mountain Pose",
+      "sanskritName": "Tadasana",
+      "category": "Standing",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Stand with feet grounded and legs active.",
+        "Stack ribs over hips and shoulders over ribs.",
+        "Lengthen through the crown of the head."
+      ],
+      "teachingCues": {
+        "general": [
+          "Root down to rise up.",
+          "Soften the jaw and breathe evenly."
+        ],
+        "beginner": [
+          "Keep feet hip-width apart for balance.",
+          "Practice near a wall to feel upright alignment."
+        ],
+        "limitedMobility": [
+          "Use a chair behind you for support.",
+          "Keep a soft bend in the knees if needed."
+        ]
+      },
+      "commonMistakes": [
+        "Locking the knees.",
+        "Ribs flaring forward.",
+        "Shoulders lifting toward ears."
+      ],
+      "image": {
+        "filename": "mountain.jpg",
+        "prompt": "Photorealistic studio photo of Mountain Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "chair",
+      "englishName": "Chair Pose",
+      "sanskritName": "Utkatasana",
+      "category": "Standing",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Bend knees and sit hips back like a chair.",
+        "Keep chest lifted while drawing low ribs in.",
+        "Reach arms up without shrugging shoulders."
+      ],
+      "teachingCues": {
+        "general": [
+          "Weight stays in the heels.",
+          "Lengthen the spine as the hips move back."
+        ],
+        "beginner": [
+          "Reduce depth in the knees.",
+          "Keep hands at heart center first."
+        ],
+        "limitedMobility": [
+          "Use wall support for balance.",
+          "Sit to a block to guide safe depth."
+        ]
+      },
+      "commonMistakes": [
+        "Knees collapsing inward.",
+        "Dumping into low back.",
+        "Shoulders tensing upward."
+      ],
+      "image": {
+        "filename": "chair.jpg",
+        "prompt": "Photorealistic studio photo of Chair Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "forward-fold",
+      "englishName": "Forward Fold",
+      "sanskritName": "Uttanasana",
+      "category": "Forward Fold",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Hinge from hips before rounding spine.",
+        "Keep a soft bend in knees as needed.",
+        "Let head and neck relax fully."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lengthen on inhale, fold deeper on exhale.",
+          "Shift weight slightly toward balls of feet."
+        ],
+        "beginner": [
+          "Hands on blocks can reduce strain.",
+          "Bend knees generously."
+        ],
+        "limitedMobility": [
+          "Place hands on thighs or shins.",
+          "Practice with feet wider than hips."
+        ]
+      },
+      "commonMistakes": [
+        "Forcing straight legs.",
+        "Rounding aggressively from upper back.",
+        "Holding the breath."
+      ],
+      "image": {
+        "filename": "forward-fold.jpg",
+        "prompt": "Photorealistic studio photo of Forward Fold, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "halfway-lift",
+      "englishName": "Halfway Lift",
+      "sanskritName": "Ardha Uttanasana",
+      "category": "Standing",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Lengthen spine forward to a flat back shape.",
+        "Press hands into shins or blocks.",
+        "Draw shoulders away from ears."
+      ],
+      "teachingCues": {
+        "general": [
+          "Think long spine, not high chest.",
+          "Keep neck neutral with gaze down."
+        ],
+        "beginner": [
+          "Bend knees to keep spine straight.",
+          "Hands can stay above knees."
+        ],
+        "limitedMobility": [
+          "Use chair seat as hand support.",
+          "Keep hands higher to reduce hamstring pull."
+        ]
+      },
+      "commonMistakes": [
+        "Rounding the back.",
+        "Hyperextending knees.",
+        "Lifting chin too high."
+      ],
+      "image": {
+        "filename": "halfway-lift.jpg",
+        "prompt": "Photorealistic studio photo of Halfway Lift, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "downward-dog",
+      "englishName": "Downward-Facing Dog",
+      "sanskritName": "Adho Mukha Svanasana",
+      "category": "Standing",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Spread fingers and press through entire hands.",
+        "Lift hips up and back to lengthen spine.",
+        "Keep knees soft if hamstrings are tight."
+      ],
+      "teachingCues": {
+        "general": [
+          "Prioritize long spine over straight legs.",
+          "Rotate upper arms outward gently."
+        ],
+        "beginner": [
+          "Shorten stance for shoulder comfort.",
+          "Practice with heels lifted."
+        ],
+        "limitedMobility": [
+          "Use blocks under hands.",
+          "Try hands on wall in a half-dog variation."
+        ]
+      },
+      "commonMistakes": [
+        "Rounded upper back.",
+        "Shoulders collapsing toward ears.",
+        "Weight only in wrists."
+      ],
+      "image": {
+        "filename": "downward-dog.jpg",
+        "prompt": "Photorealistic studio photo of Downward-Facing Dog, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "plank",
+      "englishName": "Plank Pose",
+      "sanskritName": "Phalakasana",
+      "category": "Core",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Stack shoulders directly over wrists.",
+        "Press heels back and crown forward.",
+        "Keep hips level with torso."
+      ],
+      "teachingCues": {
+        "general": [
+          "Create one long line from head to heels.",
+          "Push floor away to engage upper back."
+        ],
+        "beginner": [
+          "Drop knees for modified plank.",
+          "Reduce hold time and repeat."
+        ],
+        "limitedMobility": [
+          "Practice plank at wall or countertop.",
+          "Use fists or wedges for wrist comfort."
+        ]
+      },
+      "commonMistakes": [
+        "Hips sagging low.",
+        "Hips lifting too high.",
+        "Collapsing into shoulders."
+      ],
+      "image": {
+        "filename": "plank.jpg",
+        "prompt": "Photorealistic studio photo of Plank Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "chaturanga",
+      "englishName": "Four-Limbed Staff Pose",
+      "sanskritName": "Chaturanga Dandasana",
+      "category": "Core",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Brief hold",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Lower halfway with elbows hugging ribs.",
+        "Keep shoulders no lower than elbows.",
+        "Maintain core and leg engagement."
+      ],
+      "teachingCues": {
+        "general": [
+          "Move as one unit from plank.",
+          "Keep collarbones broad."
+        ],
+        "beginner": [
+          "Drop knees before lowering.",
+          "Lower all the way to belly if needed."
+        ],
+        "limitedMobility": [
+          "Use blocks under shoulders for depth feedback.",
+          "Replace with knees-chest-chin variation."
+        ]
+      },
+      "commonMistakes": [
+        "Shoulders dipping below elbows.",
+        "Elbows winging wide.",
+        "Core disengaging."
+      ],
+      "image": {
+        "filename": "chaturanga.jpg",
+        "prompt": "Photorealistic studio photo of Four-Limbed Staff Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "upward-dog",
+      "englishName": "Upward-Facing Dog",
+      "sanskritName": "Urdhva Mukha Svanasana",
+      "category": "Backbend",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Press into hands and tops of feet.",
+        "Lift thighs off floor.",
+        "Broaden chest and keep neck long."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lead from chest, not chin.",
+          "Keep shoulders moving away from ears."
+        ],
+        "beginner": [
+          "Use Cobra Pose as a regression.",
+          "Take smaller backbend range."
+        ],
+        "limitedMobility": [
+          "Try Sphinx Pose instead.",
+          "Use blocks under hands."
+        ]
+      },
+      "commonMistakes": [
+        "Collapsing lower back.",
+        "Overextending neck.",
+        "Shoulders crowding ears."
+      ],
+      "image": {
+        "filename": "upward-dog.jpg",
+        "prompt": "Photorealistic studio photo of Upward-Facing Dog, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "cobra",
+      "englishName": "Cobra Pose",
+      "sanskritName": "Bhujangasana",
+      "category": "Backbend",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Press pubic bone toward mat for support.",
+        "Lift chest using back body strength.",
+        "Keep elbows slightly bent and close in."
+      ],
+      "teachingCues": {
+        "general": [
+          "Draw shoulder blades down the back.",
+          "Lengthen through crown."
+        ],
+        "beginner": [
+          "Keep hands light and lift lower.",
+          "Move slowly with breath."
+        ],
+        "limitedMobility": [
+          "Use Baby Cobra with very small lift.",
+          "Place folded blanket under ribs."
+        ]
+      },
+      "commonMistakes": [
+        "Pushing up only with arms.",
+        "Neck compression.",
+        "Shoulders rounding forward."
+      ],
+      "image": {
+        "filename": "cobra.jpg",
+        "prompt": "Photorealistic studio photo of Cobra Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "child",
+      "englishName": "Child's Pose",
+      "sanskritName": "Balasana",
+      "category": "Restorative",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Fold hips toward heels with relaxed torso.",
+        "Forehead rests on mat or support.",
+        "Arms forward or alongside body."
+      ],
+      "teachingCues": {
+        "general": [
+          "Allow breath to widen the back body.",
+          "This is a rest point anytime."
+        ],
+        "beginner": [
+          "Knees can be wide for more space.",
+          "Use blanket under shins."
+        ],
+        "limitedMobility": [
+          "Support chest with a bolster.",
+          "Place blanket between hips and heels."
+        ]
+      },
+      "commonMistakes": [
+        "Forcing hips to heels.",
+        "Holding tension in neck and jaw.",
+        "Ignoring knee discomfort."
+      ],
+      "image": {
+        "filename": "child.jpg",
+        "prompt": "Photorealistic studio photo of Child's Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "cat",
+      "englishName": "Cat Pose",
+      "sanskritName": "Marjaryasana",
+      "category": "Warm-up",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Brief hold",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Hands under shoulders and knees under hips.",
+        "Round spine from tailbone to head.",
+        "Press floor away to broaden shoulder blades."
+      ],
+      "teachingCues": {
+        "general": [
+          "Move one vertebra at a time.",
+          "Link spinal movement to breath."
+        ],
+        "beginner": [
+          "Place blanket under knees.",
+          "Move in smaller ranges first."
+        ],
+        "limitedMobility": [
+          "Practice seated Cat on a chair.",
+          "Use fists if wrist extension is limited."
+        ]
+      },
+      "commonMistakes": [
+        "Moving too fast without breath.",
+        "Dumping weight into wrists.",
+        "Minimal spinal articulation."
+      ],
+      "image": {
+        "filename": "cat.jpg",
+        "prompt": "Photorealistic studio photo of Cat Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "cow",
+      "englishName": "Cow Pose",
+      "sanskritName": "Bitilasana",
+      "category": "Warm-up",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Brief hold",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Hands under shoulders and knees under hips.",
+        "Tilt pelvis to lift sit bones and chest.",
+        "Keep back of neck long."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lead from sternum as tail lifts.",
+          "Keep lower belly gently engaged."
+        ],
+        "beginner": [
+          "Take micro-movements first.",
+          "Keep gaze forward and down."
+        ],
+        "limitedMobility": [
+          "Try seated Cow with hands on knees.",
+          "Use padding under knees."
+        ]
+      },
+      "commonMistakes": [
+        "Collapsing in low back.",
+        "Cranking neck upward.",
+        "Locking elbows."
+      ],
+      "image": {
+        "filename": "cow.jpg",
+        "prompt": "Photorealistic studio photo of Cow Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "low-lunge",
+      "englishName": "Low Lunge",
+      "sanskritName": "Anjaneyasana",
+      "category": "Hip Opener",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Front knee tracks over front ankle.",
+        "Back knee stays under hip line.",
+        "Lift chest while drawing ribs in."
+      ],
+      "teachingCues": {
+        "general": [
+          "Press down to rise up through torso.",
+          "Square hips gently toward front."
+        ],
+        "beginner": [
+          "Hands on blocks for support.",
+          "Keep back toes tucked for stability."
+        ],
+        "limitedMobility": [
+          "Pad back knee with blanket.",
+          "Reduce lunge depth."
+        ]
+      },
+      "commonMistakes": [
+        "Front knee passing far beyond ankle.",
+        "Leaning heavily into low back.",
+        "Hips twisting off center."
+      ],
+      "image": {
+        "filename": "low-lunge.jpg",
+        "prompt": "Photorealistic studio photo of Low Lunge, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "high-lunge",
+      "englishName": "High Lunge",
+      "sanskritName": "Ashta Chandrasana",
+      "category": "Standing",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Front knee stacks over ankle.",
+        "Back leg stays straight and active.",
+        "Torso rises upright with hips square."
+      ],
+      "teachingCues": {
+        "general": [
+          "Root through feet to stabilize pelvis.",
+          "Lift through side waist."
+        ],
+        "beginner": [
+          "Keep hands at heart center.",
+          "Shorten stance width for balance."
+        ],
+        "limitedMobility": [
+          "Use wall support with front hand.",
+          "Lower back knee to modify."
+        ]
+      },
+      "commonMistakes": [
+        "Front knee collapsing inward.",
+        "Overarching low back.",
+        "Back heel turning out too far."
+      ],
+      "image": {
+        "filename": "high-lunge.jpg",
+        "prompt": "Photorealistic studio photo of High Lunge, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "warrior-1",
+      "englishName": "Warrior I",
+      "sanskritName": "Virabhadrasana I",
+      "category": "Standing",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Front knee bends toward 90 degrees.",
+        "Back foot grounds at slight angle.",
+        "Hips and chest orient forward."
+      ],
+      "teachingCues": {
+        "general": [
+          "Press outer back foot firmly down.",
+          "Lift arms while softening shoulders."
+        ],
+        "beginner": [
+          "Widen feet side-to-side for stability.",
+          "Hands on hips if balance is challenging."
+        ],
+        "limitedMobility": [
+          "Reduce front knee depth.",
+          "Keep hands at heart center."
+        ]
+      },
+      "commonMistakes": [
+        "Front knee drifting inward.",
+        "Back heel lifting.",
+        "Ribs flaring too far forward."
+      ],
+      "image": {
+        "filename": "warrior-1.jpg",
+        "prompt": "Photorealistic studio photo of Warrior I, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "warrior-2",
+      "englishName": "Warrior II",
+      "sanskritName": "Virabhadrasana II",
+      "category": "Standing",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Feet wide with front heel aligned to back arch.",
+        "Front knee stacks over front ankle.",
+        "Arms extend at shoulder height."
+      ],
+      "teachingCues": {
+        "general": [
+          "Reach strongly through both fingertips.",
+          "Keep torso centered over pelvis."
+        ],
+        "beginner": [
+          "Shorten stance to maintain form.",
+          "Bend front knee less deeply at first."
+        ],
+        "limitedMobility": [
+          "Use a chair under front thigh for support.",
+          "Hands can stay on hips."
+        ]
+      },
+      "commonMistakes": [
+        "Front knee collapsing inward.",
+        "Leaning torso forward.",
+        "Arms dropping below shoulder line."
+      ],
+      "image": {
+        "filename": "warrior-2.jpg",
+        "prompt": "Photorealistic studio photo of Warrior II, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "warrior-3",
+      "englishName": "Warrior III",
+      "sanskritName": "Virabhadrasana III",
+      "category": "Balance",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Hinge torso forward while lifting back leg.",
+        "Keep hips level and square to floor.",
+        "Reach crown forward and heel back."
+      ],
+      "teachingCues": {
+        "general": [
+          "Create one long line head to heel.",
+          "Micro-bend standing knee to stabilize."
+        ],
+        "beginner": [
+          "Hands can stay on blocks.",
+          "Keep lifted leg lower than hip height first."
+        ],
+        "limitedMobility": [
+          "Practice with hands on wall.",
+          "Use chair support under hands."
+        ]
+      },
+      "commonMistakes": [
+        "Opening lifted hip.",
+        "Locking standing knee.",
+        "Dropping chest too low without core support."
+      ],
+      "image": {
+        "filename": "warrior-3.jpg",
+        "prompt": "Photorealistic studio photo of Warrior III, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "triangle",
+      "englishName": "Triangle Pose",
+      "sanskritName": "Trikonasana",
+      "category": "Standing",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Straighten front leg while engaging thigh.",
+        "Hinge from front hip before placing hand.",
+        "Stack shoulders and broaden chest."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lengthen both sides of waist equally.",
+          "Use a block under lower hand as needed."
+        ],
+        "beginner": [
+          "Shorten stance for better control.",
+          "Keep top hand on hip first."
+        ],
+        "limitedMobility": [
+          "Place lower hand on shin or chair.",
+          "Keep slight bend in front knee."
+        ]
+      },
+      "commonMistakes": [
+        "Locking front knee.",
+        "Collapsing lower side waist.",
+        "Over-rotating chest and straining neck."
+      ],
+      "image": {
+        "filename": "triangle.jpg",
+        "prompt": "Photorealistic studio photo of Triangle Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "side-angle",
+      "englishName": "Extended Side Angle",
+      "sanskritName": "Utthita Parsvakonasana",
+      "category": "Standing",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Front thigh tracks toward parallel with floor.",
+        "Bottom hand to block or forearm to thigh.",
+        "Top arm reaches long overhead."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lengthen from back heel to top fingertips.",
+          "Rotate chest open without collapsing lower body."
+        ],
+        "beginner": [
+          "Use forearm-on-thigh variation.",
+          "Shorten stance for easier stability."
+        ],
+        "limitedMobility": [
+          "Use block at highest height.",
+          "Keep top hand on hip if shoulder is sensitive."
+        ]
+      },
+      "commonMistakes": [
+        "Front knee collapsing inward.",
+        "Weight dumping into lower hand.",
+        "Chest collapsing down."
+      ],
+      "image": {
+        "filename": "side-angle.jpg",
+        "prompt": "Photorealistic studio photo of Extended Side Angle, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "tree",
+      "englishName": "Tree Pose",
+      "sanskritName": "Vrksasana",
+      "category": "Balance",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Root through standing foot evenly.",
+        "Press lifted foot into inner calf or thigh.",
+        "Lengthen spine and steady gaze."
+      ],
+      "teachingCues": {
+        "general": [
+          "Press foot and leg into each other.",
+          "Fix eyes on one still point."
+        ],
+        "beginner": [
+          "Keep toes of lifted foot on mat as kickstand.",
+          "Hands at heart before reaching overhead."
+        ],
+        "limitedMobility": [
+          "Practice near wall for fingertip support.",
+          "Use chair back for one hand."
+        ]
+      },
+      "commonMistakes": [
+        "Foot pressing directly into knee joint.",
+        "Standing hip shifting out.",
+        "Holding breath during balance challenge."
+      ],
+      "image": {
+        "filename": "tree.jpg",
+        "prompt": "Photorealistic studio photo of Tree Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "revolved-triangle",
+      "englishName": "Revolved Triangle",
+      "sanskritName": "Parivrtta Trikonasana",
+      "category": "Twist",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Square hips toward the front of the mat.",
+        "Lengthen spine before rotating the torso.",
+        "Ground through back heel to stabilize twist."
+      ],
+      "teachingCues": {
+        "general": [
+          "Twist from ribcage, not neck.",
+          "Keep front leg active and lifted."
+        ],
+        "beginner": [
+          "Use a block under lower hand.",
+          "Shorten stance for balance."
+        ],
+        "limitedMobility": [
+          "Keep top hand on hip.",
+          "Bend front knee slightly."
+        ]
+      },
+      "commonMistakes": [
+        "Front knee locking hard.",
+        "Collapsing chest downward.",
+        "Forcing rotation from neck."
+      ],
+      "image": {
+        "filename": "revolved-triangle.jpg",
+        "prompt": "Photorealistic studio photo of Revolved Triangle, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "revolved-side-angle",
+      "englishName": "Revolved Side Angle",
+      "sanskritName": "Parivrtta Parsvakonasana",
+      "category": "Twist",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Front knee stacks over ankle.",
+        "Lengthen spine before pressing palms.",
+        "Keep back leg straight and strong."
+      ],
+      "teachingCues": {
+        "general": [
+          "Twist up through the heart center.",
+          "Press palms evenly to support rotation."
+        ],
+        "beginner": [
+          "Lower back knee to mat.",
+          "Use block at outer front foot."
+        ],
+        "limitedMobility": [
+          "Hands at heart instead of floor.",
+          "Practice open twist lunge first."
+        ]
+      },
+      "commonMistakes": [
+        "Front knee collapsing inward.",
+        "Back heel lifting without control.",
+        "Rounding spine into twist."
+      ],
+      "image": {
+        "filename": "revolved-side-angle.jpg",
+        "prompt": "Photorealistic studio photo of Revolved Side Angle, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "pyramid",
+      "englishName": "Pyramid Pose",
+      "sanskritName": "Parsvottanasana",
+      "category": "Forward Fold",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Square hips toward front leg.",
+        "Lengthen spine before folding over front thigh.",
+        "Press firmly through back heel."
+      ],
+      "teachingCues": {
+        "general": [
+          "Keep front hip drawing back.",
+          "Use breath to lengthen then fold."
+        ],
+        "beginner": [
+          "Hands on blocks on each side of front foot.",
+          "Widen stance side-to-side."
+        ],
+        "limitedMobility": [
+          "Micro-bend front knee.",
+          "Keep torso higher and spine long."
+        ]
+      },
+      "commonMistakes": [
+        "Rounding upper back quickly.",
+        "Overloading hamstrings.",
+        "Hips opening to side."
+      ],
+      "image": {
+        "filename": "pyramid.jpg",
+        "prompt": "Photorealistic studio photo of Pyramid Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "wide-leg-fold",
+      "englishName": "Wide-Legged Forward Fold",
+      "sanskritName": "Prasarita Padottanasana",
+      "category": "Forward Fold",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Feet parallel and legs active.",
+        "Hinge at hips with long spine.",
+        "Shift weight slightly toward balls of feet."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lift halfway on inhale, fold on exhale.",
+          "Keep inner arches lifting."
+        ],
+        "beginner": [
+          "Hands to blocks under shoulders.",
+          "Bend knees if low back rounds."
+        ],
+        "limitedMobility": [
+          "Hands on chair seat.",
+          "Take smaller stance width."
+        ]
+      },
+      "commonMistakes": [
+        "Weight sinking into heels only.",
+        "Head hanging with neck strain.",
+        "Knees hyperextending."
+      ],
+      "image": {
+        "filename": "wide-leg-fold.jpg",
+        "prompt": "Photorealistic studio photo of Wide-Legged Forward Fold, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "garland",
+      "englishName": "Garland Pose",
+      "sanskritName": "Malasana",
+      "category": "Hip Opener",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Feet slightly wider than hips with toes turned out.",
+        "Draw chest forward as hips sink down.",
+        "Press elbows to inner knees for length."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lift through spine while grounding feet.",
+          "Relax shoulders away from ears."
+        ],
+        "beginner": [
+          "Sit on a block for support.",
+          "Keep heels lifted with blanket if needed."
+        ],
+        "limitedMobility": [
+          "Use wall behind back for support.",
+          "Practice half squat variation."
+        ]
+      },
+      "commonMistakes": [
+        "Rounding lower back deeply.",
+        "Collapsing chest inward.",
+        "Knees collapsing inward."
+      ],
+      "image": {
+        "filename": "garland.jpg",
+        "prompt": "Photorealistic studio photo of Garland Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "goddess",
+      "englishName": "Goddess Pose",
+      "sanskritName": "Utkata Konasana",
+      "category": "Hip Opener",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Take a wide stance with toes turned out.",
+        "Bend knees over toes with neutral pelvis.",
+        "Lift chest while keeping ribs controlled."
+      ],
+      "teachingCues": {
+        "general": [
+          "Press knees out while rooting feet down.",
+          "Imagine back sliding down a wall."
+        ],
+        "beginner": [
+          "Reduce squat depth.",
+          "Hands at heart center for focus."
+        ],
+        "limitedMobility": [
+          "Use chair behind hips.",
+          "Hold onto wall with one hand."
+        ]
+      },
+      "commonMistakes": [
+        "Knees collapsing inward.",
+        "Overarching low back.",
+        "Feet too narrow."
+      ],
+      "image": {
+        "filename": "goddess.jpg",
+        "prompt": "Photorealistic studio photo of Goddess Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "eagle",
+      "englishName": "Eagle Pose",
+      "sanskritName": "Garudasana",
+      "category": "Balance",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Sit hips back while wrapping one leg over the other.",
+        "Wrap arms and lift elbows to shoulder height.",
+        "Stack shoulders over hips and gaze steady."
+      ],
+      "teachingCues": {
+        "general": [
+          "Squeeze inner thighs for stability.",
+          "Lift elbows while dropping shoulders."
+        ],
+        "beginner": [
+          "Use kickstand toes on floor.",
+          "Cross arms without full bind."
+        ],
+        "limitedMobility": [
+          "Use figure-four arms only.",
+          "Hold wall lightly for balance."
+        ]
+      },
+      "commonMistakes": [
+        "Torso leaning forward too much.",
+        "Shoulders hiking up.",
+        "Standing foot gripping excessively."
+      ],
+      "image": {
+        "filename": "eagle.jpg",
+        "prompt": "Photorealistic studio photo of Eagle Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "half-moon",
+      "englishName": "Half Moon",
+      "sanskritName": "Ardha Chandrasana",
+      "category": "Balance",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Place lower hand under shoulder on block or floor.",
+        "Stack hips and open chest sideways.",
+        "Flex lifted foot and extend through heel."
+      ],
+      "teachingCues": {
+        "general": [
+          "Root down through standing leg to lift up.",
+          "Keep top hip directly over bottom hip."
+        ],
+        "beginner": [
+          "Use wall behind lifted heel.",
+          "Keep top hand on hip first."
+        ],
+        "limitedMobility": [
+          "Use high block under lower hand.",
+          "Softer standing knee bend."
+        ]
+      },
+      "commonMistakes": [
+        "Top hip rolling backward too far.",
+        "Collapsing into standing knee.",
+        "Neck strain from looking up."
+      ],
+      "image": {
+        "filename": "half-moon.jpg",
+        "prompt": "Photorealistic studio photo of Half Moon, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "dancer",
+      "englishName": "Dancer Pose",
+      "sanskritName": "Natarajasana",
+      "category": "Balance",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Grip inner foot or ankle of lifted leg.",
+        "Press foot into hand as torso reaches forward.",
+        "Keep standing leg steady and chest broad."
+      ],
+      "teachingCues": {
+        "general": [
+          "Kick back and lift from the heart.",
+          "Find one fixed drishti point."
+        ],
+        "beginner": [
+          "Use strap around lifted foot.",
+          "Keep torso more upright."
+        ],
+        "limitedMobility": [
+          "Practice quad stretch at wall first.",
+          "Use opposite hand on chair for balance."
+        ]
+      },
+      "commonMistakes": [
+        "Knee splaying too wide.",
+        "Low back compression.",
+        "Losing core engagement."
+      ],
+      "image": {
+        "filename": "dancer.jpg",
+        "prompt": "Photorealistic studio photo of Dancer Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "standing-hand-to-big-toe",
+      "englishName": "Standing Hand to Big Toe",
+      "sanskritName": "Utthita Hasta Padangusthasana",
+      "category": "Balance",
+      "difficulty": "Advanced",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Shift weight into standing leg and lift opposite knee.",
+        "Hold big toe with peace fingers or strap.",
+        "Lengthen spine while extending lifted leg."
+      ],
+      "teachingCues": {
+        "general": [
+          "Stand tall before extending leg.",
+          "Keep both side waists long."
+        ],
+        "beginner": [
+          "Keep lifted knee bent and hold shin.",
+          "Use strap for extension."
+        ],
+        "limitedMobility": [
+          "Practice with heel on chair.",
+          "Use wall support with free hand."
+        ]
+      },
+      "commonMistakes": [
+        "Rounding back while lifting leg.",
+        "Locking standing knee.",
+        "Shoulder hiking toward ear."
+      ],
+      "image": {
+        "filename": "standing-hand-to-big-toe.jpg",
+        "prompt": "Photorealistic studio photo of Standing Hand to Big Toe, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "standing-split",
+      "englishName": "Standing Split",
+      "sanskritName": "Urdhva Prasarita Eka Padasana",
+      "category": "Forward Fold",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Root through standing foot and hinge forward.",
+        "Lift back leg as hips stay mostly square.",
+        "Hands ground on mat or blocks."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lift from inner thigh of top leg.",
+          "Keep torso close to standing leg."
+        ],
+        "beginner": [
+          "Keep lifted leg lower.",
+          "Use blocks under both hands."
+        ],
+        "limitedMobility": [
+          "Soft bend in standing knee.",
+          "Hands to chair or wall support."
+        ]
+      },
+      "commonMistakes": [
+        "Top hip opening too much.",
+        "Locking standing knee.",
+        "Weight shifting to heel only."
+      ],
+      "image": {
+        "filename": "standing-split.jpg",
+        "prompt": "Photorealistic studio photo of Standing Split, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "side-lunge",
+      "englishName": "Side Lunge",
+      "sanskritName": "Skandasana",
+      "category": "Hip Opener",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Bend one knee deeply while opposite leg extends.",
+        "Keep bent knee tracking over toes.",
+        "Lift chest with spine long."
+      ],
+      "teachingCues": {
+        "general": [
+          "Press grounded foot to stabilize knee.",
+          "Lengthen through extended leg heel."
+        ],
+        "beginner": [
+          "Use blocks under hands.",
+          "Keep seat higher off floor."
+        ],
+        "limitedMobility": [
+          "Reduce depth significantly.",
+          "Use chair support in front."
+        ]
+      },
+      "commonMistakes": [
+        "Bent knee collapsing inward.",
+        "Rounded spine.",
+        "Extended foot turning in excessively."
+      ],
+      "image": {
+        "filename": "side-lunge.jpg",
+        "prompt": "Photorealistic studio photo of Side Lunge, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "gate",
+      "englishName": "Gate Pose",
+      "sanskritName": "Parighasana",
+      "category": "Hip Opener",
+      "difficulty": "Beginner",
+      "breath": {
+        "enter": "Inhale",
+        "hold": "Steady breathing",
+        "exit": "Exhale"
+      },
+      "alignmentCues": [
+        "Kneel on one shin with opposite leg extended side.",
+        "Stack shoulders over hips before side bend.",
+        "Reach top arm long over ear."
+      ],
+      "teachingCues": {
+        "general": [
+          "Lengthen both sides before leaning.",
+          "Ground through extended foot edge."
+        ],
+        "beginner": [
+          "Place lower hand on block.",
+          "Keep top hand on hip initially."
+        ],
+        "limitedMobility": [
+          "Sit on blanket under kneeling knee.",
+          "Reduce side bend range."
+        ]
+      },
+      "commonMistakes": [
+        "Collapsing into lower side waist.",
+        "Twisting chest downward.",
+        "Overarching lower back."
+      ],
+      "image": {
+        "filename": "gate.jpg",
+        "prompt": "Photorealistic studio photo of Gate Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "chair-twist",
+      "englishName": "Revolved Chair",
+      "sanskritName": "Parivrtta Utkatasana",
+      "category": "Twist",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Sit hips back into Chair foundation.",
+        "Bring palms together at chest.",
+        "Hook elbow outside opposite thigh and rotate."
+      ],
+      "teachingCues": {
+        "general": [
+          "Keep knees aligned and even.",
+          "Lengthen spine before deepening twist."
+        ],
+        "beginner": [
+          "Keep twist gentle with hands at heart.",
+          "Place block between thighs for alignment."
+        ],
+        "limitedMobility": [
+          "Twist with hands on hips only.",
+          "Practice seated twist on chair."
+        ]
+      },
+      "commonMistakes": [
+        "One knee sliding ahead of other.",
+        "Rounding low back.",
+        "Holding breath in the twist."
+      ],
+      "image": {
+        "filename": "chair-twist.jpg",
+        "prompt": "Photorealistic studio photo of Revolved Chair, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "revolved-half-moon",
+      "englishName": "Revolved Half Moon",
+      "sanskritName": "Parivrtta Ardha Chandrasana",
+      "category": "Twist",
+      "difficulty": "Advanced",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Ground lower hand under shoulder on block.",
+        "Lift back leg to hip height and square hips.",
+        "Rotate chest open while stabilizing standing leg."
+      ],
+      "teachingCues": {
+        "general": [
+          "Stabilize first, then rotate.",
+          "Keep lifted leg active and straight."
+        ],
+        "beginner": [
+          "Use wall at lifted heel.",
+          "Practice with top hand on hip."
+        ],
+        "limitedMobility": [
+          "Stay in revolved lunge variation.",
+          "Use two blocks for support."
+        ]
+      },
+      "commonMistakes": [
+        "Standing knee locking.",
+        "Back leg dropping.",
+        "Twisting before finding balance."
+      ],
+      "image": {
+        "filename": "revolved-half-moon.jpg",
+        "prompt": "Photorealistic studio photo of Revolved Half Moon, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "crow",
+      "englishName": "Crow Pose",
+      "sanskritName": "Bakasana",
+      "category": "Arm Balance",
+      "difficulty": "Intermediate",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Hands shoulder-width with fingers spread.",
+        "Knees place high on triceps.",
+        "Lean forward until feet feel light."
+      ],
+      "teachingCues": {
+        "general": [
+          "Look forward, not straight down.",
+          "Engage core and hug heels toward seat."
+        ],
+        "beginner": [
+          "Use block under feet to start.",
+          "Practice one-foot lift at a time."
+        ],
+        "limitedMobility": [
+          "Work prep with knees on upper arms and toes down.",
+          "Use cushion in front for confidence."
+        ]
+      },
+      "commonMistakes": [
+        "Looking back and tipping backward.",
+        "Elbows splaying out wide.",
+        "Jumping without control."
+      ],
+      "image": {
+        "filename": "crow.jpg",
+        "prompt": "Photorealistic studio photo of Crow Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "side-crow",
+      "englishName": "Side Crow",
+      "sanskritName": "Parsva Bakasana",
+      "category": "Arm Balance",
+      "difficulty": "Advanced",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Begin in a deep twist squat.",
+        "Stack knees onto upper arm shelf.",
+        "Lean forward to shift weight into hands."
+      ],
+      "teachingCues": {
+        "general": [
+          "Twist deeply before lift-off.",
+          "Keep elbows bending straight back."
+        ],
+        "beginner": [
+          "Start with one foot lifted only.",
+          "Practice with block under hips."
+        ],
+        "limitedMobility": [
+          "Practice seated twist + crow prep separately.",
+          "Use props and avoid full lift."
+        ]
+      },
+      "commonMistakes": [
+        "Insufficient twist setup.",
+        "Collapsing shoulders.",
+        "Trying to jump into pose."
+      ],
+      "image": {
+        "filename": "side-crow.jpg",
+        "prompt": "Photorealistic studio photo of Side Crow, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "eight-angle",
+      "englishName": "Eight-Angle Pose",
+      "sanskritName": "Astavakrasana",
+      "category": "Arm Balance",
+      "difficulty": "Advanced",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Hook one leg high over shoulder.",
+        "Cross ankles and squeeze legs firmly.",
+        "Bend elbows to shift weight forward."
+      ],
+      "teachingCues": {
+        "general": [
+          "Press down strongly through both palms.",
+          "Keep legs active to stay lifted."
+        ],
+        "beginner": [
+          "Practice seated leg-over-shoulder prep.",
+          "Work with one leg lifted first."
+        ],
+        "limitedMobility": [
+          "Use preparatory hip-openers only.",
+          "Skip full bind if hamstrings are tight."
+        ]
+      },
+      "commonMistakes": [
+        "Legs losing squeeze.",
+        "Shoulders collapsing.",
+        "Forcing setup without mobility."
+      ],
+      "image": {
+        "filename": "eight-angle.jpg",
+        "prompt": "Photorealistic studio photo of Eight-Angle Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "firefly",
+      "englishName": "Firefly Pose",
+      "sanskritName": "Tittibhasana",
+      "category": "Arm Balance",
+      "difficulty": "Advanced",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Steady breathing",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Slide shoulders under legs as deeply as possible.",
+        "Hands plant firmly behind heels.",
+        "Straighten legs forward while lifting hips."
+      ],
+      "teachingCues": {
+        "general": [
+          "Squeeze legs inward against arms.",
+          "Press floor down to lift chest."
+        ],
+        "beginner": [
+          "Practice with bent knees first.",
+          "Use blocks under hands for leverage."
+        ],
+        "limitedMobility": [
+          "Focus on deep hamstring prep only.",
+          "Work seated lift variations instead."
+        ]
+      },
+      "commonMistakes": [
+        "Legs slipping off arms.",
+        "Rounding heavily through back.",
+        "Overstraining wrists."
+      ],
+      "image": {
+        "filename": "firefly.jpg",
+        "prompt": "Photorealistic studio photo of Firefly Pose, full body visible, neutral background, clear alignment."
+      }
+    },
+    {
+      "id": "peacock",
+      "englishName": "Peacock Pose",
+      "sanskritName": "Mayurasana",
+      "category": "Arm Balance",
+      "difficulty": "Advanced",
+      "breath": {
+        "enter": "Exhale",
+        "hold": "Brief hold",
+        "exit": "Inhale"
+      },
+      "alignmentCues": [
+        "Place elbows into abdomen with hands on floor.",
+        "Lean forward and extend legs straight back.",
+        "Lift feet while keeping body parallel to floor."
+      ],
+      "teachingCues": {
+        "general": [
+          "Shift weight gradually forward.",
+          "Keep core and glutes strongly engaged."
+        ],
+        "beginner": [
+          "Start with knees on floor and lean practice.",
+          "Use blocks beneath shoulders for confidence."
+        ],
+        "limitedMobility": [
+          "Use wrist prep and forearm strengthening only.",
+          "Skip full pose if wrist pain occurs."
+        ]
+      },
+      "commonMistakes": [
+        "Elbows sliding out from center.",
+        "Dropping chest suddenly.",
+        "Straining wrists without warm-up."
+      ],
+      "image": {
+        "filename": "peacock.jpg",
+        "prompt": "Photorealistic studio photo of Peacock Pose, full body visible, neutral background, clear alignment."
+      }
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+import { useMemo, useRef, useState } from "react";
+import flashcardData from "./data/poseFlashcards.json";
+import { getJoint, getPoseFigure, getStroke } from "./data/poseFigures.js";
+
+const clampIndex = (value, length) => (value + length) % length;
+const CATEGORY_ORDER = [
+  "Standing",
+  "Seated",
+  "Balance",
+  "Twist",
+  "Inversion",
+  "Backbend",
+  "Forward Fold",
+  "Arm Balance",
+  "Hip Opener",
+  "Core",
+  "Restorative",
+  "Warm-up",
+];
+
+const QUIZ_OPTIONS = [
+  { id: "sanskrit", label: "Sanskrit" },
+  { id: "breath", label: "Breath" },
+  { id: "cues", label: "Cues" },
+];
+
+function PoseSilhouette({ poseId }) {
+  const figure = getPoseFigure(poseId);
+  const stroke = getStroke();
+  const joint = getJoint();
+  const joints = useMemo(() => {
+    const points = new Map();
+    figure.limbs.forEach((limb) => {
+      limb.forEach(([x, y]) => {
+        points.set(`${x},${y}`, { x, y });
+      });
+    });
+    return Array.from(points.values());
+  }, [figure.limbs]);
+  return (
+    <svg className="pose-silhouette" viewBox="0 0 240 240" aria-hidden="true">
+      <defs>
+        <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#2a102e" />
+          <stop offset="1" stopColor="#5a1f4c" />
+        </linearGradient>
+      </defs>
+      <circle cx={figure.head[0]} cy={figure.head[1]} r={figure.head[2]} fill="url(#ink)" />
+      {figure.limbs.map((limb, limbIndex) => (
+        <polyline
+          key={`${poseId}-limb-${limbIndex}`}
+          points={limb.map((point) => `${point[0]},${point[1]}`).join(" ")}
+          fill="none"
+          stroke={stroke.color}
+          strokeWidth={stroke.width}
+          strokeLinecap={stroke.cap}
+          strokeLinejoin={stroke.join}
+        />
+      ))}
+      {joints.map((point, index) => (
+        <circle
+          key={`${poseId}-joint-${index}`}
+          cx={point.x}
+          cy={point.y}
+          r={joint.radius}
+          fill={joint.color}
+        />
+      ))}
+    </svg>
+  );
+}
+
+function PoseImage({ src, alt, poseId }) {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div className="photo-frame">
+      {!hasError && (
+        <img
+          className="pose-photo"
+          src={src}
+          alt={alt}
+          loading="lazy"
+          onError={() => setHasError(true)}
+        />
+      )}
+      {hasError && (
+        <div className="pose-fallback" aria-hidden="true">
+          <PoseSilhouette poseId={poseId} />
+        </div>
+      )}
+      <div className="photo-glow" aria-hidden="true" />
+    </div>
+  );
+}
+
+export default function App() {
+  const fullPoseList = useMemo(
+    () =>
+      flashcardData.poses.map((pose) => ({
+        ...pose,
+        english: pose.englishName,
+        sanskrit: pose.sanskritName,
+        image: `/images/poses/${pose.image.filename}`,
+        categories: [pose.category],
+        cues: pose.alignmentCues,
+      })),
+    []
+  );
+  const categoryOptions = useMemo(() => {
+    const unique = Array.from(new Set(fullPoseList.flatMap((pose) => pose.categories)));
+    return unique.sort((a, b) => {
+      const aIndex = CATEGORY_ORDER.indexOf(a);
+      const bIndex = CATEGORY_ORDER.indexOf(b);
+      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+      return a.localeCompare(b);
+    });
+  }, [fullPoseList]);
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [mode, setMode] = useState("study");
+  const [quizType, setQuizType] = useState("sanskrit");
+  const [quizRevealed, setQuizRevealed] = useState(false);
+  const [drag, setDrag] = useState({ x: 0, y: 0, isDragging: false });
+  const start = useRef({ x: 0, y: 0 });
+  const threshold = 120;
+  const triggerHaptic = () => {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      navigator.vibrate(12);
+    }
+  };
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const pull = useRef({ y: 0, active: false });
+
+  const filteredPoses = useMemo(() => {
+    if (!activeFilters.length) return fullPoseList;
+    return fullPoseList.filter((pose) =>
+      pose.categories.some((category) => activeFilters.includes(category))
+    );
+  }, [activeFilters, fullPoseList]);
+
+  const hasPoses = filteredPoses.length > 0;
+  const current = hasPoses ? filteredPoses[clampIndex(index, filteredPoses.length)] : null;
+  const nextPose = hasPoses
+    ? filteredPoses[clampIndex(index + 1, filteredPoses.length)]
+    : null;
+
+  const dragStyle = useMemo(() => {
+    const rotate = drag.x / 20;
+    const scale = drag.isDragging ? 1.01 : 1;
+    return {
+      transform: `translate3d(${drag.x}px, ${drag.y}px, 0) rotate(${rotate}deg) scale(${scale})`,
+      transition: drag.isDragging ? "none" : "transform 280ms ease",
+    };
+  }, [drag]);
+
+  const handlePointerDown = (event) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    start.current = { x: event.clientX, y: event.clientY };
+    pull.current = { y: event.clientY, active: true };
+    setDrag({ x: 0, y: 0, isDragging: true });
+  };
+
+  const handlePointerMove = (event) => {
+    if (!drag.isDragging) return;
+    const dx = event.clientX - start.current.x;
+    const dy = event.clientY - start.current.y;
+    if (Math.abs(dx) < 16 && dy > 40 && pull.current.active && !isRefreshing) {
+      setIsRefreshing(true);
+      triggerHaptic();
+      setIndex(0);
+      setTimeout(() => setIsRefreshing(false), 600);
+    }
+    setDrag({ x: dx, y: dy, isDragging: true });
+  };
+
+  const handlePointerUp = () => {
+    if (!drag.isDragging) return;
+    if (drag.x < -threshold && filteredPoses.length > 0) {
+      setIndex((value) => clampIndex(value + 1, filteredPoses.length));
+      setQuizRevealed(false);
+      triggerHaptic();
+    } else if (drag.x > threshold && filteredPoses.length > 0) {
+      setIndex((value) => clampIndex(value - 1, filteredPoses.length));
+      setQuizRevealed(false);
+      triggerHaptic();
+    }
+    setDrag({ x: 0, y: 0, isDragging: false });
+    pull.current = { y: 0, active: false };
+  };
+
+  const toggleFilter = (category) => {
+    if (category === "All") {
+      setActiveFilters([]);
+      setIndex(0);
+      setQuizRevealed(false);
+      return;
+    }
+    setActiveFilters((prev) => {
+      const exists = prev.includes(category);
+      const next = exists ? prev.filter((item) => item !== category) : [...prev, category];
+      setIndex(0);
+      setQuizRevealed(false);
+      return next;
+    });
+  };
+
+  const quizAnswer = useMemo(() => {
+    if (!current) return null;
+    if (quizType === "sanskrit") {
+      return current.sanskrit;
+    }
+    if (quizType === "breath") {
+      return `Enter: ${current.breath.enter} • Hold: ${current.breath.hold} • Exit: ${current.breath.exit}`;
+    }
+    return current.teachingCues.general.join(" ");
+  }, [current, quizType]);
+
+  return (
+    <div className="phone-shell">
+      <div className="status-bar">
+        <span className="status-time">9:41</span>
+        <span className="status-icons">5G 100%</span>
+      </div>
+      <div className="app">
+        <header className="top-bar">
+          <div>
+            <p className="eyebrow">Pose Library</p>
+            <h1>Yoga Flashcards</h1>
+          </div>
+          <div className="progress">
+            <span>{String(hasPoses ? index + 1 : 0).padStart(2, "0")}</span>
+            <span className="divider">/</span>
+            <span>{String(filteredPoses.length).padStart(2, "0")}</span>
+          </div>
+        </header>
+
+        <section className="filters">
+          <button
+            className={`filter-chip mode-chip ${mode === "study" ? "active" : ""}`}
+            type="button"
+            onClick={() => {
+              setMode("study");
+              setQuizRevealed(false);
+            }}
+          >
+            Study
+          </button>
+          <button
+            className={`filter-chip mode-chip ${mode === "quiz" ? "active" : ""}`}
+            type="button"
+            onClick={() => {
+              setMode("quiz");
+              setQuizRevealed(false);
+            }}
+          >
+            Quiz
+          </button>
+        </section>
+
+        {mode === "quiz" && (
+          <section className="quiz-switches">
+            {QUIZ_OPTIONS.map((option) => (
+              <button
+                key={option.id}
+                className={`filter-chip ${quizType === option.id ? "active" : ""}`}
+                type="button"
+                onClick={() => {
+                  setQuizType(option.id);
+                  setQuizRevealed(false);
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </section>
+        )}
+
+        <section className="filters">
+          <button
+            className={`filter-chip ${activeFilters.length === 0 ? "active" : ""}`}
+            type="button"
+            onClick={() => toggleFilter("All")}
+          >
+            All
+          </button>
+          {categoryOptions.map((category) => (
+            <button
+              key={category}
+              className={`filter-chip ${activeFilters.includes(category) ? "active" : ""}`}
+              type="button"
+              onClick={() => toggleFilter(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </section>
+
+      <section className="deck">
+        {!hasPoses ? (
+          <div className="empty-state">
+            <p>No poses match those filters.</p>
+            <button type="button" onClick={() => toggleFilter("All")}>
+              Clear filters
+            </button>
+          </div>
+        ) : (
+          <>
+            {isRefreshing && <div className="refresh-toast">Reset to the first pose</div>}
+            <article className="card back-card peek-card" aria-hidden="true">
+              <div className="card-body">
+                <p className="card-label">Coming Up</p>
+                <h2>{nextPose.english}</h2>
+                <p className="sanskrit">{nextPose.sanskrit}</p>
+              </div>
+            </article>
+            <article className="card back-card" aria-hidden="true">
+              <div className="card-body">
+                <p className="card-label">Up Next</p>
+                <h2>{nextPose.english}</h2>
+                <p className="sanskrit">{nextPose.sanskrit}</p>
+              </div>
+            </article>
+
+            <article
+              className="card active-card"
+              style={dragStyle}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
+            >
+              <div className="edge-taps">
+                <button
+                  type="button"
+                  aria-label="Previous pose"
+                  onClick={() => {
+                    setIndex((value) => clampIndex(value - 1, filteredPoses.length));
+                    setQuizRevealed(false);
+                    triggerHaptic();
+                  }}
+                />
+                <button
+                  type="button"
+                  aria-label="Next pose"
+                  onClick={() => {
+                    setIndex((value) => clampIndex(value + 1, filteredPoses.length));
+                    setQuizRevealed(false);
+                    triggerHaptic();
+                  }}
+                />
+              </div>
+              <div className="card-media">
+                <PoseImage src={current.image} alt={current.english} poseId={current.id} />
+              </div>
+              <div className="card-body">
+                <div className="card-top">
+                  <div>
+                    <p className="card-label">{mode === "study" ? "Current Pose" : "Quiz Card"}</p>
+                <h2>{current.english}</h2>
+                {mode === "study" && <p className="sanskrit">{current.sanskrit}</p>}
+              </div>
+                  <div className="chip">{current.cues.length} cues</div>
+                </div>
+                <div className="meta-row">
+                  {mode === "study" ? (
+                    <div className="meta-pill">
+                      Breath: {current.breath.enter} / {current.breath.exit}
+                    </div>
+                  ) : (
+                    <div className="meta-pill">Difficulty: {current.difficulty}</div>
+                  )}
+                  <div className="meta-tags">
+                    {current.categories.map((category) => (
+                      <span key={category}>{category}</span>
+                    ))}
+                  </div>
+                </div>
+                {mode === "study" ? (
+                  <>
+                    <ul className="cues">
+                      {current.cues.map((cue) => (
+                        <li key={cue}>{cue}</li>
+                      ))}
+                    </ul>
+                    <ul className="cues">
+                      {current.teachingCues.beginner.map((cue) => (
+                        <li key={`beginner-${cue}`}>Beginner: {cue}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <div className="quiz-panel">
+                    <p className="quiz-question">
+                      {quizType === "sanskrit" && "What is the Sanskrit name for this pose?"}
+                      {quizType === "breath" && "What is the breath timing for this pose?"}
+                      {quizType === "cues" && "What is one teaching cue for this pose?"}
+                    </p>
+                    {quizRevealed ? (
+                      <p className="quiz-answer">{quizAnswer}</p>
+                    ) : (
+                      <button
+                        type="button"
+                        className="solid reveal-btn"
+                        onClick={() => setQuizRevealed(true)}
+                      >
+                        Reveal Answer
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+            </article>
+          </>
+        )}
+      </section>
+
+        <footer className="controls">
+          <button
+            className="ghost"
+            type="button"
+            onClick={() => {
+              setIndex((value) => clampIndex(value - 1, filteredPoses.length));
+              setQuizRevealed(false);
+              triggerHaptic();
+            }}
+            disabled={filteredPoses.length === 0}
+          >
+            Previous
+          </button>
+          <div className="hint">Swipe left or right to study</div>
+          <button
+            className="solid"
+            type="button"
+            onClick={() => {
+              setIndex((value) => clampIndex(value + 1, filteredPoses.length));
+              setQuizRevealed(false);
+              triggerHaptic();
+            }}
+            disabled={filteredPoses.length === 0}
+          >
+            Next
+          </button>
+        </footer>
+      </div>
+    </div>
+  );
+}

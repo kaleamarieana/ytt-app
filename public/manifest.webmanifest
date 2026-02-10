@@ -1,0 +1,23 @@
+{
+  "name": "YTT Pose Library",
+  "short_name": "YTT",
+  "description": "A premium yoga flashcard library for on-the-go practice.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f0ea",
+  "theme_color": "#b81d6a",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
