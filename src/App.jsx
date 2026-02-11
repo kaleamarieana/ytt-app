@@ -28,6 +28,30 @@ const QUIZ_OPTIONS = [
   { id: "cues", label: "Cues" },
 ];
 
+const EXHALE_KEYWORDS = [
+  "forward fold",
+  "fold",
+  "downward",
+  "twist",
+  "revolved",
+  "chaturanga",
+  "crow",
+  "firefly",
+  "peacock",
+  "child",
+  "cat",
+  "garland",
+];
+
+const EXHALE_CATEGORIES = new Set(["Forward Fold", "Twist", "Arm Balance", "Core", "Restorative"]);
+
+const inferEnterBreath = (pose) => {
+  const name = `${pose.englishName} ${pose.sanskritName}`.toLowerCase();
+  if (EXHALE_KEYWORDS.some((keyword) => name.includes(keyword))) return "Exhale";
+  if (EXHALE_CATEGORIES.has(pose.category)) return "Exhale";
+  return "Inhale";
+};
+
 function PoseSilhouette({ poseId }) {
   const figure = getPoseFigure(poseId);
   const stroke = getStroke();
@@ -102,6 +126,17 @@ export default function App() {
     () =>
       flashcardData.poses.map((pose) => ({
         ...pose,
+        ...(() => {
+          const enter = inferEnterBreath(pose);
+          const exit = enter === "Inhale" ? "Exhale" : "Inhale";
+          return {
+            breath: {
+              enter,
+              hold: pose.breath?.hold || "Steady breathing",
+              exit,
+            },
+          };
+        })(),
         english: pose.englishName,
         sanskrit: pose.sanskritName,
         image: pose.image.url || `/images/poses/${pose.image.filename}`,
@@ -266,10 +301,6 @@ export default function App() {
 
   return (
     <div className="phone-shell">
-      <div className="status-bar">
-        <span className="status-time">9:41</span>
-        <span className="status-icons">5G 100%</span>
-      </div>
       <div className="app">
         <header className="top-bar">
           <div>
