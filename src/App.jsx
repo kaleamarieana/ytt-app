@@ -5,7 +5,7 @@ import flashcardData from "./data/poseFlashcards.json";
 import { getJoint, getPoseFigure, getStroke } from "./data/poseFigures.js";
 
 const clampIndex = (value, length) => (value + length) % length;
-const SWIPE_THRESHOLD = 55;
+const SWIPE_THRESHOLD = 45;
 
 const CATEGORY_ORDER = [
   "Standing",
@@ -170,6 +170,9 @@ export default function App() {
   const pull = useRef({ y: 0, active: false });
   const startedInScrollableArea = useRef(false);
   const gestureAxis = useRef(null);
+  const dragRef = useRef({ x: 0, y: 0, isDragging: false });
+  const swipeMeta = useRef({ startTime: 0, lastX: 0, lastTime: 0 });
+  const isAnimatingSwipe = useRef(false);
 
   const triggerHaptic = () => {
     if (typeof navigator !== "undefined" && navigator.vibrate) {
@@ -203,21 +206,31 @@ export default function App() {
   };
 
   const resetDrag = () => {
-    setDrag({ x: 0, y: 0, isDragging: false });
+    isAnimatingSwipe.current = false;
+    const next = { x: 0, y: 0, isDragging: false };
+    dragRef.current = next;
+    setDrag(next);
     pull.current = { y: 0, active: false };
     startedInScrollableArea.current = false;
     gestureAxis.current = null;
   };
 
   const beginDrag = (x, y) => {
+    if (isAnimatingSwipe.current) return;
     start.current = { x, y };
     pull.current = { y, active: true };
     gestureAxis.current = null;
-    setDrag({ x: 0, y: 0, isDragging: true });
+    const now = Date.now();
+    swipeMeta.current = { startTime: now, lastX: x, lastTime: now };
+    const next = { x: 0, y: 0, isDragging: true };
+    dragRef.current = next;
+    setDrag(next);
   };
 
   const updateDrag = (x, y, event) => {
-    if (!drag.isDragging || startedInScrollableArea.current) return;
+    if (!dragRef.current.isDragging || startedInScrollableArea.current || isAnimatingSwipe.current) {
+      return;
+    }
     const dx = x - start.current.x;
     const dy = y - start.current.y;
 
@@ -238,25 +251,58 @@ export default function App() {
       setTimeout(() => setIsRefreshing(false), 600);
     }
 
-    setDrag({ x: dx, y: dy, isDragging: true });
+    const now = Date.now();
+    swipeMeta.current.lastX = x;
+    swipeMeta.current.lastTime = now;
+    const next = { x: dx, y: dy * 0.2, isDragging: true };
+    dragRef.current = next;
+    setDrag(next);
   };
 
-  const finalizeDrag = () => {
-    if (!drag.isDragging) return;
+  const finalizeDrag = (endX, endY) => {
+    const liveDrag = dragRef.current;
+    if (!liveDrag.isDragging) return;
+    if (isAnimatingSwipe.current) return;
+
+    let dx = liveDrag.x;
+    let dy = liveDrag.y;
+
+    if (typeof endX === "number" && typeof endY === "number") {
+      dx = endX - start.current.x;
+      dy = endY - start.current.y;
+    }
+
+    if (!gestureAxis.current && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      gestureAxis.current = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+
     if (gestureAxis.current !== "x") {
       resetDrag();
       return;
     }
-    if (drag.x < -SWIPE_THRESHOLD && filteredPoses.length > 0) {
-      setIndex((value) => clampIndex(value + 1, filteredPoses.length));
-      setQuizRevealed(false);
-      triggerHaptic();
-    } else if (drag.x > SWIPE_THRESHOLD && filteredPoses.length > 0) {
-      setIndex((value) => clampIndex(value - 1, filteredPoses.length));
-      setQuizRevealed(false);
-      triggerHaptic();
+
+    const elapsed = Math.max(1, swipeMeta.current.lastTime - swipeMeta.current.startTime);
+    const velocityX = (swipeMeta.current.lastX - start.current.x) / elapsed; // px/ms
+    const shouldSwipe = Math.abs(dx) >= SWIPE_THRESHOLD || Math.abs(velocityX) > 0.45;
+
+    if (!shouldSwipe || filteredPoses.length === 0) {
+      resetDrag();
+      return;
     }
-    resetDrag();
+
+    const direction = dx < 0 ? 1 : -1; // left = next, right = previous
+    const offscreen = (typeof window !== "undefined" ? window.innerWidth : 420) * 1.15;
+    isAnimatingSwipe.current = true;
+    const next = { x: direction === 1 ? -offscreen : offscreen, y: 0, isDragging: false };
+    dragRef.current = next;
+    setDrag(next);
+
+    setTimeout(() => {
+      setIndex((value) => clampIndex(value + direction, filteredPoses.length));
+      setQuizRevealed(false);
+      triggerHaptic();
+      resetDrag();
+    }, 170);
   };
 
   const handlePointerDown = (event) => {
@@ -275,7 +321,7 @@ export default function App() {
   };
   const handlePointerUp = (event) => {
     if (event?.pointerType === "touch") return;
-    finalizeDrag();
+    finalizeDrag(event?.clientX, event?.clientY);
   };
 
   const handleTouchStart = (event) => {
@@ -292,7 +338,14 @@ export default function App() {
     updateDrag(touch.clientX, touch.clientY, event);
   };
 
-  const handleTouchEnd = () => finalizeDrag();
+  const handleTouchEnd = (event) => {
+    const touch = event.changedTouches?.[0];
+    if (touch) {
+      finalizeDrag(touch.clientX, touch.clientY);
+      return;
+    }
+    finalizeDrag();
+  };
 
   const toggleFilter = (category) => {
     if (category === "All") {
