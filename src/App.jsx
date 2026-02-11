@@ -5,7 +5,7 @@ import flashcardData from "./data/poseFlashcards.json";
 import { getJoint, getPoseFigure, getStroke } from "./data/poseFigures.js";
 
 const clampIndex = (value, length) => (value + length) % length;
-const SWIPE_THRESHOLD = 120;
+const SWIPE_THRESHOLD = 70;
 
 const CATEGORY_ORDER = [
   "Standing",
@@ -198,11 +198,7 @@ export default function App() {
 
   const shouldIgnoreDragStart = (target) => {
     if (!(target instanceof Element)) return false;
-    return Boolean(
-      target.closest(
-        "button, a, input, textarea, select, [role='button'], .card-body, .quiz-panel"
-      )
-    );
+    return Boolean(target.closest("button, a, input, textarea, select, [role='button']"));
   };
 
   const resetDrag = () => {
@@ -446,13 +442,13 @@ export default function App() {
                       <h2>{current.english}</h2>
                       {mode === "study" && <p className="sanskrit">{current.sanskrit}</p>}
                     </div>
-                    <div className="chip">{current.cues.length} cues</div>
+                    <div className="chip">{mode === "study" ? "Study" : `${current.cues.length} cues`}</div>
                   </div>
 
                   <div className="meta-row">
                     {mode === "study" ? (
                       <div className="meta-pill">
-                        Breath: {current.breath.enter} / {current.breath.exit}
+                        Breath: {current.breath.enter} / {current.breath.hold} / {current.breath.exit}
                       </div>
                     ) : (
                       <div className="meta-pill">Difficulty: {current.difficulty}</div>
@@ -465,18 +461,24 @@ export default function App() {
                   </div>
 
                   {mode === "study" ? (
-                    <>
-                      <ul className="cues">
-                        {current.cues.map((cue) => (
-                          <li key={cue}>{cue}</li>
-                        ))}
-                      </ul>
-                      <ul className="cues">
-                        {current.teachingCues.beginner.map((cue) => (
-                          <li key={`beginner-${cue}`}>Beginner: {cue}</li>
-                        ))}
-                      </ul>
-                    </>
+                    <ul className="cues study-snapshot">
+                      {current.cues.slice(0, 2).map((cue) => (
+                        <li key={cue} className="study-line">
+                          Align: {cue}
+                        </li>
+                      ))}
+                      {current.teachingCues.general?.[0] && (
+                        <li className="study-line">Teach: {current.teachingCues.general[0]}</li>
+                      )}
+                      {current.teachingCues.beginner?.[0] && (
+                        <li className="study-line">Beginner: {current.teachingCues.beginner[0]}</li>
+                      )}
+                      {current.teachingCues.limitedMobility?.[0] && (
+                        <li className="study-line">
+                          Mobility: {current.teachingCues.limitedMobility[0]}
+                        </li>
+                      )}
+                    </ul>
                   ) : (
                     <div className="quiz-panel">
                       <p className="quiz-question">
