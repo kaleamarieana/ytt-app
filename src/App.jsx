@@ -5,7 +5,7 @@ import flashcardData from "./data/poseFlashcards.json";
 import { getJoint, getPoseFigure, getStroke } from "./data/poseFigures.js";
 
 const clampIndex = (value, length) => (value + length) % length;
-const SWIPE_THRESHOLD = 70;
+const SWIPE_THRESHOLD = 55;
 
 const CATEGORY_ORDER = [
   "Standing",
@@ -169,6 +169,7 @@ export default function App() {
   const start = useRef({ x: 0, y: 0 });
   const pull = useRef({ y: 0, active: false });
   const startedInScrollableArea = useRef(false);
+  const gestureAxis = useRef(null);
 
   const triggerHaptic = () => {
     if (typeof navigator !== "undefined" && navigator.vibrate) {
@@ -205,18 +206,30 @@ export default function App() {
     setDrag({ x: 0, y: 0, isDragging: false });
     pull.current = { y: 0, active: false };
     startedInScrollableArea.current = false;
+    gestureAxis.current = null;
   };
 
   const beginDrag = (x, y) => {
     start.current = { x, y };
     pull.current = { y, active: true };
+    gestureAxis.current = null;
     setDrag({ x: 0, y: 0, isDragging: true });
   };
 
-  const updateDrag = (x, y) => {
+  const updateDrag = (x, y, event) => {
     if (!drag.isDragging || startedInScrollableArea.current) return;
     const dx = x - start.current.x;
     const dy = y - start.current.y;
+
+    if (!gestureAxis.current && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      gestureAxis.current = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+
+    if (gestureAxis.current === "y") return;
+
+    if (event && typeof event.preventDefault === "function") {
+      event.preventDefault();
+    }
 
     if (Math.abs(dx) < 16 && dy > 40 && pull.current.active && !isRefreshing) {
       setIsRefreshing(true);
@@ -230,6 +243,10 @@ export default function App() {
 
   const finalizeDrag = () => {
     if (!drag.isDragging) return;
+    if (gestureAxis.current !== "x") {
+      resetDrag();
+      return;
+    }
     if (drag.x < -SWIPE_THRESHOLD && filteredPoses.length > 0) {
       setIndex((value) => clampIndex(value + 1, filteredPoses.length));
       setQuizRevealed(false);
@@ -243,6 +260,7 @@ export default function App() {
   };
 
   const handlePointerDown = (event) => {
+    if (event.pointerType === "touch") return;
     startedInScrollableArea.current = shouldIgnoreDragStart(event.target);
     if (startedInScrollableArea.current) return;
     if (event.currentTarget.setPointerCapture && event.pointerId !== undefined) {
@@ -251,8 +269,14 @@ export default function App() {
     beginDrag(event.clientX, event.clientY);
   };
 
-  const handlePointerMove = (event) => updateDrag(event.clientX, event.clientY);
-  const handlePointerUp = () => finalizeDrag();
+  const handlePointerMove = (event) => {
+    if (event.pointerType === "touch") return;
+    updateDrag(event.clientX, event.clientY, event);
+  };
+  const handlePointerUp = (event) => {
+    if (event?.pointerType === "touch") return;
+    finalizeDrag();
+  };
 
   const handleTouchStart = (event) => {
     startedInScrollableArea.current = shouldIgnoreDragStart(event.target);
@@ -265,7 +289,7 @@ export default function App() {
   const handleTouchMove = (event) => {
     const touch = event.touches[0];
     if (!touch) return;
-    updateDrag(touch.clientX, touch.clientY);
+    updateDrag(touch.clientX, touch.clientY, event);
   };
 
   const handleTouchEnd = () => finalizeDrag();
@@ -435,7 +459,7 @@ export default function App() {
                 <div className="card-media">
                   <PoseImage src={current.image} alt={current.english} poseId={current.id} />
                 </div>
-                <div className="card-body">
+                <div className={`card-body ${mode === "study" ? "study-body" : ""}`}>
                   <div className="card-top">
                     <div>
                       <p className="card-label">{mode === "study" ? "Current Pose" : "Quiz Card"}</p>
