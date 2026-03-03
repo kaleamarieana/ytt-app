@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import flashcardData from "./data/poseFlashcards.json";
 import { getJoint, getPoseFigure, getStroke } from "./data/poseFigures.js";
 
@@ -28,6 +28,8 @@ const QUIZ_OPTIONS = [
   { id: "cues", label: "Cues" },
 ];
 
+const THEME_STORAGE_KEY = "ytt-theme-preference";
+
 const EXHALE_KEYWORDS = [
   "forward fold",
   "fold",
@@ -44,6 +46,11 @@ const EXHALE_KEYWORDS = [
 ];
 
 const EXHALE_CATEGORIES = new Set(["Forward Fold", "Twist", "Arm Balance", "Core", "Restorative"]);
+
+const getTimeBasedTheme = () => {
+  const currentHour = new Date().getHours();
+  return currentHour >= 6 && currentHour < 18 ? "day" : "night";
+};
 
 const inferEnterBreath = (pose) => {
   const name = `${pose.englishName} ${pose.sanskritName}`.toLowerCase();
@@ -163,6 +170,14 @@ export default function App() {
   const [mode, setMode] = useState("study");
   const [quizType, setQuizType] = useState("sanskrit");
   const [quizRevealed, setQuizRevealed] = useState(false);
+  const [themePreference, setThemePreference] = useState(() => {
+    if (typeof window === "undefined") return "auto";
+    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+    return savedTheme === "day" || savedTheme === "night" || savedTheme === "auto"
+      ? savedTheme
+      : "auto";
+  });
+  const [timeTheme, setTimeTheme] = useState(getTimeBasedTheme);
   const [drag, setDrag] = useState({ x: 0, y: 0, isDragging: false });
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -173,6 +188,27 @@ export default function App() {
   const dragRef = useRef({ x: 0, y: 0, isDragging: false });
   const swipeMeta = useRef({ startTime: 0, lastX: 0, lastTime: 0 });
   const isAnimatingSwipe = useRef(false);
+
+  const activeTheme = themePreference === "auto" ? timeTheme : themePreference;
+
+  useEffect(() => {
+    if (themePreference !== "auto") return undefined;
+    const intervalId = window.setInterval(() => {
+      setTimeTheme(getTimeBasedTheme());
+    }, 60_000);
+    return () => window.clearInterval(intervalId);
+  }, [themePreference]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(THEME_STORAGE_KEY, themePreference);
+  }, [themePreference]);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.documentElement.dataset.theme = activeTheme;
+    document.documentElement.style.colorScheme = activeTheme === "night" ? "dark" : "light";
+  }, [activeTheme]);
 
   const triggerHaptic = () => {
     if (typeof navigator !== "undefined" && navigator.vibrate) {
@@ -372,6 +408,10 @@ export default function App() {
     return current.teachingCues.general.join(" ");
   }, [current, quizType]);
 
+  const toggleTheme = () => {
+    setThemePreference(activeTheme === "night" ? "day" : "night");
+  };
+
   return (
     <div className="phone-shell">
       <div className="app">
@@ -380,10 +420,30 @@ export default function App() {
             <p className="eyebrow">Pose Library</p>
             <h1>Yoga Flashcards</h1>
           </div>
-          <div className="progress">
-            <span>{String(hasPoses ? index + 1 : 0).padStart(2, "0")}</span>
-            <span className="divider">/</span>
-            <span>{String(filteredPoses.length).padStart(2, "0")}</span>
+          <div className="top-actions">
+            <div className="progress">
+              <span>{String(hasPoses ? index + 1 : 0).padStart(2, "0")}</span>
+              <span className="divider">/</span>
+              <span>{String(filteredPoses.length).padStart(2, "0")}</span>
+            </div>
+            <button
+              className="theme-toggle"
+              type="button"
+              onClick={toggleTheme}
+              aria-label={activeTheme === "night" ? "Switch to day mode" : "Switch to night mode"}
+              title={activeTheme === "night" ? "Switch to day mode" : "Switch to night mode"}
+            >
+              {activeTheme === "night" ? (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="4.4" />
+                  <path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.2 5.2l1.8 1.8M17 17l1.8 1.8M18.8 5.2L17 7M7 17l-1.8 1.8" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.4 14.9A8.4 8.4 0 1 1 9.1 3.6a7.1 7.1 0 1 0 11.3 11.3Z" />
+                </svg>
+              )}
+            </button>
           </div>
         </header>
 
