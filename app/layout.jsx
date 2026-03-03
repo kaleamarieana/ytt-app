@@ -1,8 +1,8 @@
 import "../src/index.css";
 
 export const metadata = {
-  title: "Yoga Flashcards",
-  description: "Yoga pose study app for English/Sanskrit memorization and breath cues.",
+  title: "My Sadhana",
+  description: "Premium yoga study app for Sanskrit memorization, breath cues, and focused practice.",
 };
 
 export default function RootLayout({ children }) {

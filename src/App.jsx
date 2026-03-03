@@ -416,9 +416,20 @@ export default function App() {
     <div className="phone-shell">
       <div className="app">
         <header className="top-bar">
-          <div>
-            <p className="eyebrow">Pose Library</p>
-            <h1>Yoga Flashcards</h1>
+          <div className="brand">
+            <div className="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64">
+                <path d="M32 8c5 7 5 13 0 20-5-7-5-13 0-20Z" />
+                <path d="M15 23c8 1 13 4 17 11-8 0-14-3-17-11Z" />
+                <path d="M49 23c-3 8-9 11-17 11 4-7 10-10 17-11Z" />
+                <path d="M20 43c6-4 12-4 18 0-6 6-12 6-18 0Z" />
+                <path d="M44 43c-6-4-12-4-18 0 6 6 12 6 18 0Z" />
+              </svg>
+            </div>
+            <div>
+              <p className="eyebrow">Sacred Study Flow</p>
+              <h1>My Sadhana</h1>
+            </div>
           </div>
           <div className="top-actions">
             <div className="progress">
@@ -447,228 +458,245 @@ export default function App() {
           </div>
         </header>
 
-        <section className="filters">
-          <button
-            className={`filter-chip mode-chip ${mode === "study" ? "active" : ""}`}
-            type="button"
-            onClick={() => {
-              setMode("study");
-              setQuizRevealed(false);
-            }}
-          >
-            Study
-          </button>
-          <button
-            className={`filter-chip mode-chip ${mode === "quiz" ? "active" : ""}`}
-            type="button"
-            onClick={() => {
-              setMode("quiz");
-              setQuizRevealed(false);
-            }}
-          >
-            Quiz
-          </button>
-        </section>
+        <div className="content-layout">
+          <aside className="control-panel">
+            <section className="panel-block">
+              <p className="panel-label">Session</p>
+              <div className="filters">
+                <button
+                  className={`filter-chip mode-chip ${mode === "study" ? "active" : ""}`}
+                  type="button"
+                  onClick={() => {
+                    setMode("study");
+                    setQuizRevealed(false);
+                  }}
+                >
+                  Study
+                </button>
+                <button
+                  className={`filter-chip mode-chip ${mode === "quiz" ? "active" : ""}`}
+                  type="button"
+                  onClick={() => {
+                    setMode("quiz");
+                    setQuizRevealed(false);
+                  }}
+                >
+                  Quiz
+                </button>
+              </div>
+            </section>
 
-        {mode === "quiz" && (
-          <section className="quiz-switches">
-            {QUIZ_OPTIONS.map((option) => (
+            {mode === "quiz" && (
+              <section className="panel-block">
+                <p className="panel-label">Quiz Focus</p>
+                <div className="quiz-switches">
+                  {QUIZ_OPTIONS.map((option) => (
+                    <button
+                      key={option.id}
+                      className={`filter-chip ${quizType === option.id ? "active" : ""}`}
+                      type="button"
+                      onClick={() => {
+                        setQuizType(option.id);
+                        setQuizRevealed(false);
+                      }}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="panel-block">
+              <p className="panel-label">Categories</p>
+              <div className="filters">
+                <button
+                  className={`filter-chip ${activeFilters.length === 0 ? "active" : ""}`}
+                  type="button"
+                  onClick={() => toggleFilter("All")}
+                >
+                  All
+                </button>
+                {categoryOptions.map((category) => (
+                  <button
+                    key={category}
+                    className={`filter-chip ${activeFilters.includes(category) ? "active" : ""}`}
+                    type="button"
+                    onClick={() => toggleFilter(category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </section>
+          </aside>
+
+          <section className="study-panel">
+            <section className="deck">
+              {!hasPoses ? (
+                <div className="empty-state">
+                  <p>No poses match those filters.</p>
+                  <button type="button" onClick={() => toggleFilter("All")}>
+                    Clear filters
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {isRefreshing && <div className="refresh-toast">Reset to the first pose</div>}
+                  <article className="card back-card peek-card" aria-hidden="true">
+                    <div className="card-body">
+                      <p className="card-label">Coming Up</p>
+                      <h2>{nextPose.english}</h2>
+                      <p className="sanskrit">{nextPose.sanskrit}</p>
+                    </div>
+                  </article>
+                  <article className="card back-card" aria-hidden="true">
+                    <div className="card-body">
+                      <p className="card-label">Up Next</p>
+                      <h2>{nextPose.english}</h2>
+                      <p className="sanskrit">{nextPose.sanskrit}</p>
+                    </div>
+                  </article>
+
+                  <article
+                    className="card active-card"
+                    style={dragStyle}
+                    onPointerDown={handlePointerDown}
+                    onPointerMove={handlePointerMove}
+                    onPointerUp={handlePointerUp}
+                    onPointerCancel={handlePointerUp}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                    onTouchCancel={handleTouchEnd}
+                  >
+                    <div className="edge-taps">
+                      <button
+                        className="side-nav prev"
+                        type="button"
+                        aria-label="Previous pose"
+                        onClick={() => {
+                          setIndex((value) => clampIndex(value - 1, filteredPoses.length));
+                          setQuizRevealed(false);
+                          triggerHaptic();
+                        }}
+                      />
+                      <button
+                        className="side-nav next"
+                        type="button"
+                        aria-label="Next pose"
+                        onClick={() => {
+                          setIndex((value) => clampIndex(value + 1, filteredPoses.length));
+                          setQuizRevealed(false);
+                          triggerHaptic();
+                        }}
+                      />
+                    </div>
+
+                    <div className="card-media">
+                      <PoseImage src={current.image} alt={current.english} poseId={current.id} />
+                    </div>
+                    <div className={`card-body ${mode === "study" ? "study-body" : ""}`}>
+                      <div className="card-top">
+                        <div>
+                          <p className="card-label">{mode === "study" ? "Current Pose" : "Quiz Card"}</p>
+                          <h2>{current.english}</h2>
+                          {mode === "study" && <p className="sanskrit">{current.sanskrit}</p>}
+                        </div>
+                        <div className="chip">
+                          {mode === "study" ? "Study" : `${current.cues.length} cues`}
+                        </div>
+                      </div>
+
+                      <div className="meta-row">
+                        {mode === "study" ? (
+                          <div className="meta-pill">
+                            Breath: {current.breath.enter} / {current.breath.hold} / {current.breath.exit}
+                          </div>
+                        ) : (
+                          <div className="meta-pill">Difficulty: {current.difficulty}</div>
+                        )}
+                        <div className="meta-tags">
+                          {current.categories.map((category) => (
+                            <span key={category}>{category}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {mode === "study" ? (
+                        <ul className="cues study-snapshot">
+                          {current.cues.slice(0, 2).map((cue) => (
+                            <li key={cue} className="study-line">
+                              Align: {cue}
+                            </li>
+                          ))}
+                          {current.teachingCues.general?.[0] && (
+                            <li className="study-line">Teach: {current.teachingCues.general[0]}</li>
+                          )}
+                          {current.teachingCues.beginner?.[0] && (
+                            <li className="study-line">Beginner: {current.teachingCues.beginner[0]}</li>
+                          )}
+                          {current.teachingCues.limitedMobility?.[0] && (
+                            <li className="study-line">
+                              Mobility: {current.teachingCues.limitedMobility[0]}
+                            </li>
+                          )}
+                        </ul>
+                      ) : (
+                        <div className="quiz-panel">
+                          <p className="quiz-question">
+                            {quizType === "sanskrit" && "What is the Sanskrit name for this pose?"}
+                            {quizType === "breath" && "What is the breath timing for this pose?"}
+                            {quizType === "cues" && "What is one teaching cue for this pose?"}
+                          </p>
+                          {quizRevealed ? (
+                            <p className="quiz-answer">{quizAnswer}</p>
+                          ) : (
+                            <button
+                              type="button"
+                              className="solid reveal-btn"
+                              onClick={() => setQuizRevealed(true)}
+                            >
+                              Reveal Answer
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                </>
+              )}
+            </section>
+
+            <footer className="controls">
               <button
-                key={option.id}
-                className={`filter-chip ${quizType === option.id ? "active" : ""}`}
+                className="ghost"
                 type="button"
                 onClick={() => {
-                  setQuizType(option.id);
+                  setIndex((value) => clampIndex(value - 1, filteredPoses.length));
                   setQuizRevealed(false);
+                  triggerHaptic();
                 }}
+                disabled={filteredPoses.length === 0}
               >
-                {option.label}
+                Previous
               </button>
-            ))}
+              <div className="hint">Swipe left or right to study</div>
+              <button
+                className="solid"
+                type="button"
+                onClick={() => {
+                  setIndex((value) => clampIndex(value + 1, filteredPoses.length));
+                  setQuizRevealed(false);
+                  triggerHaptic();
+                }}
+                disabled={filteredPoses.length === 0}
+              >
+                Next
+              </button>
+            </footer>
           </section>
-        )}
-
-        <section className="filters">
-          <button
-            className={`filter-chip ${activeFilters.length === 0 ? "active" : ""}`}
-            type="button"
-            onClick={() => toggleFilter("All")}
-          >
-            All
-          </button>
-          {categoryOptions.map((category) => (
-            <button
-              key={category}
-              className={`filter-chip ${activeFilters.includes(category) ? "active" : ""}`}
-              type="button"
-              onClick={() => toggleFilter(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </section>
-
-        <section className="deck">
-          {!hasPoses ? (
-            <div className="empty-state">
-              <p>No poses match those filters.</p>
-              <button type="button" onClick={() => toggleFilter("All")}>
-                Clear filters
-              </button>
-            </div>
-          ) : (
-            <>
-              {isRefreshing && <div className="refresh-toast">Reset to the first pose</div>}
-              <article className="card back-card peek-card" aria-hidden="true">
-                <div className="card-body">
-                  <p className="card-label">Coming Up</p>
-                  <h2>{nextPose.english}</h2>
-                  <p className="sanskrit">{nextPose.sanskrit}</p>
-                </div>
-              </article>
-              <article className="card back-card" aria-hidden="true">
-                <div className="card-body">
-                  <p className="card-label">Up Next</p>
-                  <h2>{nextPose.english}</h2>
-                  <p className="sanskrit">{nextPose.sanskrit}</p>
-                </div>
-              </article>
-
-              <article
-                className="card active-card"
-                style={dragStyle}
-                onPointerDown={handlePointerDown}
-                onPointerMove={handlePointerMove}
-                onPointerUp={handlePointerUp}
-                onPointerCancel={handlePointerUp}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-                onTouchCancel={handleTouchEnd}
-              >
-                <div className="edge-taps">
-                  <button
-                    className="side-nav prev"
-                    type="button"
-                    aria-label="Previous pose"
-                    onClick={() => {
-                      setIndex((value) => clampIndex(value - 1, filteredPoses.length));
-                      setQuizRevealed(false);
-                      triggerHaptic();
-                    }}
-                  />
-                  <button
-                    className="side-nav next"
-                    type="button"
-                    aria-label="Next pose"
-                    onClick={() => {
-                      setIndex((value) => clampIndex(value + 1, filteredPoses.length));
-                      setQuizRevealed(false);
-                      triggerHaptic();
-                    }}
-                  />
-                </div>
-
-                <div className="card-media">
-                  <PoseImage src={current.image} alt={current.english} poseId={current.id} />
-                </div>
-                <div className={`card-body ${mode === "study" ? "study-body" : ""}`}>
-                  <div className="card-top">
-                    <div>
-                      <p className="card-label">{mode === "study" ? "Current Pose" : "Quiz Card"}</p>
-                      <h2>{current.english}</h2>
-                      {mode === "study" && <p className="sanskrit">{current.sanskrit}</p>}
-                    </div>
-                    <div className="chip">{mode === "study" ? "Study" : `${current.cues.length} cues`}</div>
-                  </div>
-
-                  <div className="meta-row">
-                    {mode === "study" ? (
-                      <div className="meta-pill">
-                        Breath: {current.breath.enter} / {current.breath.hold} / {current.breath.exit}
-                      </div>
-                    ) : (
-                      <div className="meta-pill">Difficulty: {current.difficulty}</div>
-                    )}
-                    <div className="meta-tags">
-                      {current.categories.map((category) => (
-                        <span key={category}>{category}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {mode === "study" ? (
-                    <ul className="cues study-snapshot">
-                      {current.cues.slice(0, 2).map((cue) => (
-                        <li key={cue} className="study-line">
-                          Align: {cue}
-                        </li>
-                      ))}
-                      {current.teachingCues.general?.[0] && (
-                        <li className="study-line">Teach: {current.teachingCues.general[0]}</li>
-                      )}
-                      {current.teachingCues.beginner?.[0] && (
-                        <li className="study-line">Beginner: {current.teachingCues.beginner[0]}</li>
-                      )}
-                      {current.teachingCues.limitedMobility?.[0] && (
-                        <li className="study-line">
-                          Mobility: {current.teachingCues.limitedMobility[0]}
-                        </li>
-                      )}
-                    </ul>
-                  ) : (
-                    <div className="quiz-panel">
-                      <p className="quiz-question">
-                        {quizType === "sanskrit" && "What is the Sanskrit name for this pose?"}
-                        {quizType === "breath" && "What is the breath timing for this pose?"}
-                        {quizType === "cues" && "What is one teaching cue for this pose?"}
-                      </p>
-                      {quizRevealed ? (
-                        <p className="quiz-answer">{quizAnswer}</p>
-                      ) : (
-                        <button
-                          type="button"
-                          className="solid reveal-btn"
-                          onClick={() => setQuizRevealed(true)}
-                        >
-                          Reveal Answer
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </article>
-            </>
-          )}
-        </section>
-
-        <footer className="controls">
-          <button
-            className="ghost"
-            type="button"
-            onClick={() => {
-              setIndex((value) => clampIndex(value - 1, filteredPoses.length));
-              setQuizRevealed(false);
-              triggerHaptic();
-            }}
-            disabled={filteredPoses.length === 0}
-          >
-            Previous
-          </button>
-          <div className="hint">Swipe left or right to study</div>
-          <button
-            className="solid"
-            type="button"
-            onClick={() => {
-              setIndex((value) => clampIndex(value + 1, filteredPoses.length));
-              setQuizRevealed(false);
-              triggerHaptic();
-            }}
-            disabled={filteredPoses.length === 0}
-          >
-            Next
-          </button>
-        </footer>
+        </div>
       </div>
     </div>
   );
