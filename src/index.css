@@ -6,6 +6,8 @@
   --ink-soft: #4e6471;
   --fuchsia: #3ba89f;
   --magenta: #2a7f80;
+  --orchid: #cf78b2;
+  --rose-mist: #f4d9ea;
   --lavender: #b2d8d2;
   --lilac: #edf7f4;
   --petal: #d8ecfa;
@@ -23,6 +25,8 @@
   --ink-soft: #bad1d6;
   --fuchsia: #6bc8c1;
   --magenta: #4ca6a1;
+  --orchid: #d798c2;
+  --rose-mist: #4b2f44;
   --lavender: #355868;
   --lilac: #17242b;
   --petal: #1f2e36;
@@ -45,6 +49,7 @@ body {
   background: radial-gradient(circle at top, #ffffff, var(--sand) 42%),
     radial-gradient(circle at 20% 8%, rgba(59, 168, 159, 0.12), transparent 54%),
     radial-gradient(circle at 84% 12%, rgba(123, 187, 227, 0.2), transparent 52%),
+    radial-gradient(circle at 60% 14%, rgba(207, 120, 178, 0.12), transparent 48%),
     linear-gradient(132deg, #f8fcfb, #edf5ff);
   color: var(--ink);
   font-family: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
@@ -142,8 +147,13 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: linear-gradient(145deg, rgba(59, 168, 159, 0.22), rgba(123, 187, 227, 0.24));
-  border: 1px solid rgba(59, 168, 159, 0.3);
+  background: linear-gradient(
+    145deg,
+    rgba(59, 168, 159, 0.22),
+    rgba(123, 187, 227, 0.2),
+    rgba(207, 120, 178, 0.18)
+  );
+  border: 1px solid rgba(85, 140, 154, 0.3);
   display: grid;
   place-items: center;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
@@ -159,20 +169,61 @@ body {
   stroke-linejoin: round;
 }
 
+.brand-text {
+  display: grid;
+  gap: 2px;
+}
+
 .eyebrow {
   margin: 0 0 6px;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: var(--magenta);
+  color: color-mix(in srgb, var(--magenta) 72%, var(--orchid) 28%);
 }
 
-h1 {
+.logo-wordmark {
   margin: 0;
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(30px, 4vw, 46px);
+  font-size: clamp(30px, 4vw, 47px);
   font-weight: 600;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.25px;
+  line-height: 0.95;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.logo-my {
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: color-mix(in srgb, var(--ink) 68%, var(--magenta) 32%);
+}
+
+.logo-name {
+  background: linear-gradient(115deg, var(--ink) 8%, #2f6a77 46%, #8d4f78 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo-lotus-inline {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-2px);
+}
+
+.logo-lotus-inline svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #b66795;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .progress {
@@ -266,7 +317,7 @@ h1 {
   border: 1px solid var(--hairline);
   border-radius: 20px;
   padding: 12px;
-  box-shadow: 0 14px 24px rgba(21, 43, 56, 0.09);
+  box-shadow: 0 14px 24px rgba(21, 43, 56, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .panel-label {
@@ -304,7 +355,7 @@ h1 {
 
 .filter-chip {
   border: 1px solid var(--hairline);
-  background: var(--glass);
+  background: linear-gradient(125deg, var(--glass), rgba(253, 242, 249, 0.55));
   color: var(--ink-soft);
   padding: 8px 16px;
   border-radius: 999px;
@@ -456,7 +507,7 @@ h1 {
 .meta-pill {
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(59, 168, 159, 0.14);
+  background: linear-gradient(120deg, rgba(59, 168, 159, 0.14), rgba(207, 120, 178, 0.14));
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -472,7 +523,7 @@ h1 {
 .meta-tags span {
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(123, 187, 227, 0.22);
+  background: linear-gradient(120deg, rgba(123, 187, 227, 0.22), rgba(207, 120, 178, 0.2));
   font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -509,7 +560,7 @@ h2 {
 .chip {
   padding: 8px 16px;
   border-radius: 999px;
-  background: linear-gradient(120deg, var(--lavender), var(--petal));
+  background: linear-gradient(120deg, var(--lavender), var(--petal), var(--rose-mist));
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
@@ -614,7 +665,7 @@ h2 {
   margin-top: auto;
   padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
   border-radius: 22px;
-  background: var(--glass);
+  background: linear-gradient(125deg, var(--glass), rgba(250, 240, 247, 0.5));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 16px 40px rgba(20, 49, 62, 0.16);
@@ -674,6 +725,7 @@ h2 {
   background: radial-gradient(circle at top, #0f1e24, #081117 42%),
     radial-gradient(circle at 20% 10%, rgba(107, 200, 193, 0.16), transparent 54%),
     radial-gradient(circle at 85% 12%, rgba(68, 130, 163, 0.28), transparent 52%),
+    radial-gradient(circle at 54% 14%, rgba(215, 152, 194, 0.2), transparent 48%),
     linear-gradient(140deg, #0f1d24, #061015);
 }
 
@@ -697,12 +749,31 @@ h2 {
 }
 
 :root[data-theme="night"] .brand-mark {
-  background: linear-gradient(145deg, rgba(107, 200, 193, 0.22), rgba(68, 130, 163, 0.24));
+  background: linear-gradient(
+    145deg,
+    rgba(107, 200, 193, 0.22),
+    rgba(68, 130, 163, 0.24),
+    rgba(215, 152, 194, 0.18)
+  );
   border-color: rgba(175, 223, 228, 0.2);
 }
 
 :root[data-theme="night"] .brand-mark svg {
   stroke: #8fddd8;
+}
+
+:root[data-theme="night"] .logo-name {
+  background: linear-gradient(115deg, #dbe9eb 6%, #92d8d2 52%, #d798c2 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+:root[data-theme="night"] .logo-my {
+  color: color-mix(in srgb, var(--ink) 70%, var(--orchid) 30%);
+}
+
+:root[data-theme="night"] .logo-lotus-inline svg {
+  stroke: #d9a8c8;
 }
 
 :root[data-theme="night"] .theme-toggle {
@@ -720,12 +791,21 @@ h2 {
   box-shadow: 0 12px 30px rgba(43, 130, 128, 0.35);
 }
 
+:root[data-theme="night"] .filter-chip {
+  background: linear-gradient(125deg, rgba(20, 34, 41, 0.9), rgba(59, 35, 52, 0.52));
+}
+
 :root[data-theme="night"] .back-card {
   background: linear-gradient(140deg, rgba(23, 37, 45, 0.76), rgba(16, 28, 35, 0.86));
 }
 
 :root[data-theme="night"] .photo-frame {
-  background: linear-gradient(120deg, rgba(107, 200, 193, 0.22), rgba(68, 130, 163, 0.34));
+  background: linear-gradient(
+    120deg,
+    rgba(107, 200, 193, 0.22),
+    rgba(68, 130, 163, 0.3),
+    rgba(215, 152, 194, 0.2)
+  );
 }
 
 :root[data-theme="night"] .pose-photo {
@@ -841,8 +921,15 @@ h2 {
     height: 32px;
   }
 
-  h1 {
+  .logo-wordmark {
     font-size: clamp(20px, 6.2vw, 24px);
+    gap: 6px;
+  }
+
+  .logo-lotus-inline {
+    width: 14px;
+    height: 14px;
+    transform: translateY(-1px);
   }
 
   .content-layout {
@@ -1000,6 +1087,17 @@ h2 {
     text-align: center;
     order: 3;
     font-size: 9px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .logo-wordmark {
+    font-size: 50px;
+  }
+
+  .logo-lotus-inline {
+    width: 20px;
+    height: 20px;
   }
 }
 

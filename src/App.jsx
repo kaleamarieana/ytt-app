@@ -414,9 +414,20 @@ export default function App() {
                 <path d="M44 43c-6-4-12-4-18 0 6 6 12 6 18 0Z" />
               </svg>
             </div>
-            <div>
+            <div className="brand-text">
               <p className="eyebrow">Sacred Study Flow</p>
-              <h1>My Sadhana</h1>
+              <h1 className="logo-wordmark">
+                <span className="logo-my">My</span>
+                <span className="logo-lotus-inline" aria-hidden="true">
+                  <svg viewBox="0 0 32 32">
+                    <path d="M16 5.5c2.4 3.2 2.5 6.1 0 9.3-2.4-3.2-2.3-6.1 0-9.3Z" />
+                    <path d="M7.2 13.4c3.9.2 6.4 1.8 8.8 5-4-.1-6.6-1.8-8.8-5Z" />
+                    <path d="M24.8 13.4c-2.2 3.2-4.8 4.9-8.8 5 2.4-3.2 4.9-4.8 8.8-5Z" />
+                    <path d="M11 22.1c1.8-1.2 3.5-1.6 5-1.6s3.2.4 5 1.6c-1.7 2-3.4 2.9-5 2.9s-3.3-.9-5-2.9Z" />
+                  </svg>
+                </span>
+                <span className="logo-name">Sadhana</span>
+              </h1>
             </div>
           </div>
           <div className="top-actions">
