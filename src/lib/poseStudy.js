@@ -104,8 +104,11 @@ export const buildCueSets = (pose) => {
 };
 
 export const buildAssistSets = (pose) => {
+  const category = pose.category;
   const baseAlignment = sentenceCase(pose.alignmentCues?.[0] || "Stack the main joints first");
-  const secondAlignment = sentenceCase(pose.alignmentCues?.[1] || "Lengthen the spine and soften effort");
+  const secondAlignment = sentenceCase(
+    pose.alignmentCues?.[1] || "Lengthen the spine and soften effort"
+  );
   const beginner = sentenceCase(
     pose.teachingCues?.beginner?.[0] || "Shorten range of motion and build stability first"
   );
@@ -113,38 +116,130 @@ export const buildAssistSets = (pose) => {
     pose.teachingCues?.limitedMobility?.[0] || "Use props to reduce strain and improve control"
   );
 
+  const handsOnByCategory = {
+    Standing: [
+      "Stand beside student; one hand to outer hip, one hand to lower ribs",
+      "Guide hips back while lengthening the side waist forward",
+      "Reduce pressure immediately if breath shortens or knees lock",
+    ],
+    Balance: [
+      "Spot from side body, not from wrists or shoulders",
+      "Lightly support pelvis and upper back to stabilize center line",
+      "Release touch in stages so student can own the balance",
+    ],
+    "Forward Fold": [
+      "Support pelvis from top of sacrum, avoid pressing on low back",
+      "Invite length first, then gentle depth on exhale only",
+      "Stop assist if hamstrings grip or neck tightens",
+    ],
+    Twist: [
+      "Anchor one hand at outer hip, second at upper back",
+      "Cue spine to lengthen before rotation; rotate from thoracic spine",
+      "Keep assist subtle; never force knee or lumbar rotation",
+    ],
+    Backbend: [
+      "Support upper thoracic area and outer hips, not lumbar compression",
+      "Guide chest broadening and tailbone length before depth",
+      "Exit slowly and cue neutral spine before next transition",
+    ],
+    Seated: [
+      "Stabilize pelvis first to create a neutral spine base",
+      "Offer gentle directional pressure through shoulder girdle only",
+      "Use minimal force; prioritize breath rhythm over range",
+    ],
+    "Arm Balance": [
+      "Spot at pelvis and sternum line, not pulling limbs",
+      "Guide weight shift forward in small increments",
+      "Use blankets/bolsters under face side for confidence and safety",
+    ],
+    Inversion: [
+      "Assist at upper back and hips, never yank legs",
+      "Keep neck free and neutral; avoid compressive force",
+      "Abort assist immediately if breath spikes or gaze panics",
+    ],
+    "Hip Opener": [
+      "Support femur direction at hip crease, not knee joint pressure",
+      "Stabilize opposite pelvis so stretch stays localized",
+      "Back off at first sign of pinching in front hip or knee",
+    ],
+    Core: [
+      "Cue neutral pelvis and deep core before adding challenge",
+      "Use contact at lower ribs to support anti-flare control",
+      "Assist only enough to organize shape, then release",
+    ],
+    Restorative: [
+      "Use props and blankets first, touch second",
+      "Adjust support points at knees, head, and sacrum for comfort",
+      "Hands-on should calm nervous system, never intensify stretch",
+    ],
+    "Warm-up": [
+      "Use broad directional cueing with low intensity touch",
+      "Support rhythm and coordination, not range pushing",
+      "Transition slowly and check comfort each repetition",
+    ],
+  };
+
+  const verbalByCategory = {
+    Standing: "Coach base to crown: feet root, ribs stack, crown lengthens.",
+    Balance: "Give one anchor point and one drishti cue only.",
+    "Forward Fold": "Cue length first, fold second, with knees soft as needed.",
+    Twist: "Lengthen spine on inhale, rotate gently on exhale.",
+    Backbend: "Protect low back by lifting sternum and lengthening tailbone.",
+    Seated: "Ground sit bones evenly and grow up before changing shape.",
+    "Arm Balance": "Shift weight gradually and keep gaze slightly forward.",
+    Inversion: "Set shoulder stability first, then lift with controlled breath.",
+    "Hip Opener": "Keep sensation in hip tissue, not knee joint.",
+    Core: "Exhale to organize core and stabilize pelvis.",
+    Restorative: "Use less effort, slower breath, and more support.",
+    "Warm-up": "Move progressively from simple to layered actions.",
+  };
+
+  const drillByCategory = {
+    Standing: "Wall hover drill: back body to wall, refine ribs-over-hips.",
+    Balance: "Toe tap drill: tap lifted toes to floor between holds.",
+    "Forward Fold": "Block ladder: hands on high/mid/low blocks to find safe depth.",
+    Twist: "Strap assist: hold strap between hands to keep chest broad.",
+    Backbend: "Sphinx-to-cobra wave to build thoracic extension safely.",
+    Seated: "Blanket under sit bones to improve neutral pelvic tilt.",
+    "Arm Balance": "Crow prep with block under forehead to build confidence.",
+    Inversion: "Dolphin holds at wall for shoulder patterning before inversion.",
+    "Hip Opener": "Supported lunge with blocks under hands and rear knee pad.",
+    Core: "3-breath plank ladder with knee-down option each round.",
+    Restorative: "Bolster + blanket stack for passive 2-3 minute holds.",
+    "Warm-up": "Joint circles plus cat-cow tempo for breath-led mobility.",
+  };
+
   return [
     {
       id: "verbal",
-      title: "Verbal Adjustment",
-      type: "No-touch cueing",
+      title: "Verbal Coaching Strategy",
+      type: "Observation-driven language",
       steps: [
-        `Say clearly: "${baseAlignment}"`,
-        `Then refine: "${secondAlignment}"`,
-        "Ask for one breath cycle, then confirm if the shape feels stable",
+        `Start with one priority cue: "${baseAlignment}"`,
+        `Refine with one secondary cue: "${secondAlignment}"`,
+        sentenceCase(
+          verbalByCategory[category] ||
+            "Use one setup cue, one action cue, then check if breath stays steady"
+        ),
       ],
-      safety: "Best first choice in group classes.",
+      safety: "Keep it concise: one body part, one action, one breath check.",
     },
     {
       id: "hands-on",
-      title: "Hands-On Assist",
+      title: "Hands-On Adjustment",
       type: "Consent-based touch",
-      steps: [
-        "Get clear verbal consent before touch",
+      steps: ["Ask consent and explain where touch will happen", ...(handsOnByCategory[category] || [
         "Use broad, steady contact to guide direction, not force depth",
-        "Release assist as soon as alignment improves and breath stays smooth",
-      ],
+        "Support pelvis and upper back before increasing leverage",
+        "Release assist as soon as breath and alignment improve",
+      ])],
       safety: "Skip touch if breath shortens, guarding appears, or student seems unsure.",
     },
     {
       id: "props",
-      title: "Prop-Based Assist",
-      type: "Independent support",
-      steps: [
-        beginner,
-        mobility,
-        "Re-check joints after placing props and adjust height for neutral spine",
-      ],
+      title: "Prop / Self-Assist Option",
+      type: "Independent refinement",
+      steps: [beginner, mobility, sentenceCase(drillByCategory[category] || "Use props to support shape while maintaining smooth breath")],
       safety: "Props should reduce effort and increase steadiness, never force range.",
     },
   ];

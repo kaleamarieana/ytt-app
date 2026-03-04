@@ -95,10 +95,8 @@ export default function App() {
   const [quizRevealed, setQuizRevealed] = useState(false);
   const [cueSetIndex, setCueSetIndex] = useState(0);
   const [drag, setDrag] = useState({ x: 0, y: 0, isDragging: false });
-  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const start = useRef({ x: 0, y: 0 });
-  const pull = useRef({ y: 0, active: false });
   const startedInScrollableArea = useRef(false);
   const gestureAxis = useRef(null);
   const dragRef = useRef({ x: 0, y: 0, isDragging: false });
@@ -148,7 +146,6 @@ export default function App() {
     const next = { x: 0, y: 0, isDragging: false };
     dragRef.current = next;
     setDrag(next);
-    pull.current = { y: 0, active: false };
     startedInScrollableArea.current = false;
     gestureAxis.current = null;
   };
@@ -156,7 +153,6 @@ export default function App() {
   const beginDrag = (x, y) => {
     if (isAnimatingSwipe.current) return;
     start.current = { x, y };
-    pull.current = { y, active: true };
     gestureAxis.current = null;
     const now = Date.now();
     swipeMeta.current = { startTime: now, lastX: x, lastTime: now };
@@ -181,13 +177,6 @@ export default function App() {
 
     if (event && typeof event.preventDefault === "function") {
       event.preventDefault();
-    }
-
-    if (Math.abs(dx) < 16 && dy > 40 && pull.current.active && !isRefreshing) {
-      setIsRefreshing(true);
-      triggerHaptic();
-      setIndex(0);
-      setTimeout(() => setIsRefreshing(false), 600);
     }
 
     const now = Date.now();
@@ -404,7 +393,6 @@ export default function App() {
                 </div>
               ) : (
                 <>
-                  {isRefreshing && <div className="refresh-toast">Reset to the first pose</div>}
                   <article className="card back-card peek-card" aria-hidden="true">
                     <div className="card-body">
                       <p className="card-label">Coming Up</p>
@@ -493,7 +481,9 @@ export default function App() {
                               className="cue-refresh"
                               aria-label="Show next cue set"
                               title="Show next cue set"
-                              onClick={() => setCueSetIndex((value) => (value + 1) % 3)}
+                              onClick={() =>
+                                setCueSetIndex((value) => (value + 1) % Math.max(1, cueSets.length))
+                              }
                             >
                               <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M20 12a8 8 0 1 1-2.3-5.7" />

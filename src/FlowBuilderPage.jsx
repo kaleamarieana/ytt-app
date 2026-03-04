@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AppHeader from "./components/AppHeader";
 import flashcardData from "./data/poseFlashcards.json";
 import { buildPoseList, generateFlowTemplate } from "./lib/poseStudy";
@@ -26,6 +26,8 @@ export default function FlowBuilderPage() {
   const [duration, setDuration] = useState(60);
   const [seed, setSeed] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [savedFlows, setSavedFlows] = useState([]);
+  const [shareStatus, setShareStatus] = useState("");
 
   const flow = useMemo(
     () => generateFlowTemplate({ style, duration, level, seed }, poses),
@@ -34,8 +36,8 @@ export default function FlowBuilderPage() {
 
   const totalMinutes = flow.reduce((total, block) => total + block.minutes, 0);
 
-  const exportFlow = async () => {
-    const text = [
+  const buildFlowText = () =>
+    [
       `My Sadhana Flow Plan (${style.toUpperCase()}, ${duration} min, ${level})`,
       ...flow.map(
         (block, index) =>
@@ -45,10 +47,104 @@ export default function FlowBuilderPage() {
       ),
     ].join("\n");
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const saved = window.localStorage.getItem("ytt-saved-flows");
+    if (!saved) return;
+    try {
+      setSavedFlows(JSON.parse(saved));
+    } catch {
+      setSavedFlows([]);
+    }
+  }, []);
+
+  const persistSavedFlows = (items) => {
+    setSavedFlows(items);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("ytt-saved-flows", JSON.stringify(items));
+    }
+  };
+
+  const exportFlow = async () => {
+    const text = buildFlowText();
+
     if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 1400);
+    }
+  };
+
+  const saveAsNote = () => {
+    const text = buildFlowText();
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `my-sadhana-flow-${style}-${duration}min.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const saveAsPdf = () => {
+    const text = buildFlowText()
+      .split("\n")
+      .map((line) => `<p>${line.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>`)
+      .join("");
+
+    const win = window.open("", "_blank", "width=900,height=1100");
+    if (!win) return;
+    win.document.write(`
+      <html>
+        <head>
+          <title>My Sadhana Flow</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 28px; color: #1f2d33; }
+            h1 { margin: 0 0 14px; }
+            p { margin: 0 0 8px; line-height: 1.45; }
+          </style>
+        </head>
+        <body>
+          <h1>My Sadhana Flow Plan</h1>
+          ${text}
+        </body>
+      </html>
+    `);
+    win.document.close();
+    win.focus();
+    win.print();
+  };
+
+  const saveFlow = () => {
+    const item = {
+      id: `flow-${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      style,
+      level,
+      duration,
+      text: buildFlowText(),
+    };
+    const next = [item, ...savedFlows].slice(0, 8);
+    persistSavedFlows(next);
+    setShareStatus("Flow saved locally");
+    setTimeout(() => setShareStatus(""), 1500);
+  };
+
+  const shareFlow = async () => {
+    const text = buildFlowText();
+    if (typeof navigator !== "undefined" && navigator.share) {
+      await navigator.share({
+        title: "My Sadhana Flow Plan",
+        text,
+      });
+      return;
+    }
+    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      setShareStatus("Plan copied to share");
+      setTimeout(() => setShareStatus(""), 1500);
     }
   };
 
@@ -113,6 +209,19 @@ export default function FlowBuilderPage() {
               <button type="button" className="ghost" onClick={exportFlow}>
                 {copied ? "Copied" : "Copy Plan"}
               </button>
+              <button type="button" className="ghost" onClick={saveFlow}>
+                Save Flow
+              </button>
+              <button type="button" className="ghost" onClick={saveAsNote}>
+                Save as Note
+              </button>
+              <button type="button" className="ghost" onClick={saveAsPdf}>
+                Save as PDF
+              </button>
+              <button type="button" className="ghost" onClick={shareFlow}>
+                Share
+              </button>
+              {shareStatus ? <p className="flow-status">{shareStatus}</p> : null}
             </section>
           </aside>
 
@@ -149,6 +258,20 @@ export default function FlowBuilderPage() {
                     </section>
                   ))}
                 </div>
+
+                {savedFlows.length ? (
+                  <section className="saved-flows">
+                    <p className="card-label">Saved Flows</p>
+                    <ul>
+                      {savedFlows.map((saved) => (
+                        <li key={saved.id}>
+                          {saved.style.toUpperCase()} • {saved.duration} min •{" "}
+                          {new Date(saved.createdAt).toLocaleDateString()}
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                ) : null}
               </div>
             </article>
           </section>
