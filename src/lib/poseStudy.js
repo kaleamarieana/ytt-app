@@ -49,7 +49,8 @@ export const buildPoseList = (flashcardData) =>
     breath: inferBreathCue(pose),
     english: pose.englishName,
     sanskrit: pose.sanskritName,
-    image: pose.image.url || `/images/poses/${pose.image.filename}`,
+    image: pose.image.filename ? `/images/poses/${pose.image.filename}` : pose.image.url,
+    imageFallback: pose.image.url || "",
     categories: [pose.category],
   }));
 

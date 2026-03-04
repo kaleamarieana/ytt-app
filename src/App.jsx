@@ -60,18 +60,35 @@ function PoseSilhouette({ poseId }) {
   );
 }
 
-function PoseImage({ src, alt, poseId }) {
+function PoseImage({ src, fallbackSrc, alt, poseId }) {
   const [hasError, setHasError] = useState(false);
+  const [resolvedSrc, setResolvedSrc] = useState(src);
+  const [usedFallback, setUsedFallback] = useState(false);
+
+  useEffect(() => {
+    setResolvedSrc(src);
+    setHasError(false);
+    setUsedFallback(false);
+  }, [src, fallbackSrc, poseId]);
+
+  const handleError = () => {
+    if (!usedFallback && fallbackSrc && fallbackSrc !== resolvedSrc) {
+      setResolvedSrc(fallbackSrc);
+      setUsedFallback(true);
+      return;
+    }
+    setHasError(true);
+  };
 
   return (
     <div className="photo-frame">
       {!hasError && (
         <img
           className="pose-photo"
-          src={src}
+          src={resolvedSrc}
           alt={alt}
           loading="lazy"
-          onError={() => setHasError(true)}
+          onError={handleError}
         />
       )}
       {hasError && (
@@ -443,7 +460,12 @@ export default function App() {
                           }}
                         />
                       </div>
-                      <PoseImage src={current.image} alt={current.english} poseId={current.id} />
+                      <PoseImage
+                        src={current.image}
+                        fallbackSrc={current.imageFallback}
+                        alt={current.english}
+                        poseId={current.id}
+                      />
                     </div>
                     <div className={`card-body ${mode === "study" ? "study-body" : ""}`}>
                       <div className="card-top">
