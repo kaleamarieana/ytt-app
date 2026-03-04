@@ -1,63 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import AppHeader from "./components/AppHeader";
 import flashcardData from "./data/poseFlashcards.json";
 import { getJoint, getPoseFigure, getStroke } from "./data/poseFigures.js";
+import { buildCueSets, buildPoseList, getCategoryOptions } from "./lib/poseStudy";
 
 const clampIndex = (value, length) => (value + length) % length;
 const SWIPE_THRESHOLD = 45;
-
-const CATEGORY_ORDER = [
-  "Standing",
-  "Seated",
-  "Balance",
-  "Twist",
-  "Inversion",
-  "Backbend",
-  "Forward Fold",
-  "Arm Balance",
-  "Hip Opener",
-  "Core",
-  "Restorative",
-  "Warm-up",
-];
 
 const QUIZ_OPTIONS = [
   { id: "sanskrit", label: "Sanskrit" },
   { id: "breath", label: "Breath" },
   { id: "cues", label: "Cues" },
 ];
-
-const THEME_STORAGE_KEY = "ytt-theme-preference";
-
-const EXHALE_KEYWORDS = [
-  "forward fold",
-  "fold",
-  "downward",
-  "twist",
-  "revolved",
-  "chaturanga",
-  "crow",
-  "firefly",
-  "peacock",
-  "child",
-  "cat",
-  "garland",
-];
-
-const EXHALE_CATEGORIES = new Set(["Forward Fold", "Twist", "Arm Balance", "Core", "Restorative"]);
-
-const getTimeBasedTheme = () => {
-  const currentHour = new Date().getHours();
-  return currentHour >= 6 && currentHour < 18 ? "day" : "night";
-};
-
-const inferBreathCue = (pose) => {
-  const name = `${pose.englishName} ${pose.sanskritName}`.toLowerCase();
-  if (EXHALE_KEYWORDS.some((keyword) => name.includes(keyword))) return "Exhale";
-  if (EXHALE_CATEGORIES.has(pose.category)) return "Exhale";
-  return "Inhale";
-};
 
 function PoseSilhouette({ poseId }) {
   const figure = getPoseFigure(poseId);
@@ -129,45 +85,15 @@ function PoseImage({ src, alt, poseId }) {
 }
 
 export default function App() {
-  const fullPoseList = useMemo(
-    () =>
-      flashcardData.poses.map((pose) => ({
-        ...pose,
-        breath: inferBreathCue(pose),
-        english: pose.englishName,
-        sanskrit: pose.sanskritName,
-        image: pose.image.url || `/images/poses/${pose.image.filename}`,
-        categories: [pose.category],
-        cues: pose.alignmentCues,
-      })),
-    []
-  );
-
-  const categoryOptions = useMemo(() => {
-    const unique = Array.from(new Set(fullPoseList.flatMap((pose) => pose.categories)));
-    return unique.sort((a, b) => {
-      const aIndex = CATEGORY_ORDER.indexOf(a);
-      const bIndex = CATEGORY_ORDER.indexOf(b);
-      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-      if (aIndex !== -1) return -1;
-      if (bIndex !== -1) return 1;
-      return a.localeCompare(b);
-    });
-  }, [fullPoseList]);
+  const fullPoseList = useMemo(() => buildPoseList(flashcardData), []);
+  const categoryOptions = useMemo(() => getCategoryOptions(fullPoseList), [fullPoseList]);
 
   const [activeFilters, setActiveFilters] = useState([]);
   const [index, setIndex] = useState(0);
   const [mode, setMode] = useState("study");
   const [quizType, setQuizType] = useState("sanskrit");
   const [quizRevealed, setQuizRevealed] = useState(false);
-  const [themePreference, setThemePreference] = useState(() => {
-    if (typeof window === "undefined") return "auto";
-    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-    return savedTheme === "day" || savedTheme === "night" || savedTheme === "auto"
-      ? savedTheme
-      : "auto";
-  });
-  const [timeTheme, setTimeTheme] = useState(getTimeBasedTheme);
+  const [cueSetIndex, setCueSetIndex] = useState(0);
   const [drag, setDrag] = useState({ x: 0, y: 0, isDragging: false });
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -178,27 +104,6 @@ export default function App() {
   const dragRef = useRef({ x: 0, y: 0, isDragging: false });
   const swipeMeta = useRef({ startTime: 0, lastX: 0, lastTime: 0 });
   const isAnimatingSwipe = useRef(false);
-
-  const activeTheme = themePreference === "auto" ? timeTheme : themePreference;
-
-  useEffect(() => {
-    if (themePreference !== "auto") return undefined;
-    const intervalId = window.setInterval(() => {
-      setTimeTheme(getTimeBasedTheme());
-    }, 60_000);
-    return () => window.clearInterval(intervalId);
-  }, [themePreference]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    window.localStorage.setItem(THEME_STORAGE_KEY, themePreference);
-  }, [themePreference]);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    document.documentElement.dataset.theme = activeTheme;
-    document.documentElement.style.colorScheme = activeTheme === "night" ? "dark" : "light";
-  }, [activeTheme]);
 
   const triggerHaptic = () => {
     if (typeof navigator !== "undefined" && navigator.vibrate) {
@@ -216,6 +121,13 @@ export default function App() {
   const hasPoses = filteredPoses.length > 0;
   const current = hasPoses ? filteredPoses[clampIndex(index, filteredPoses.length)] : null;
   const nextPose = hasPoses ? filteredPoses[clampIndex(index + 1, filteredPoses.length)] : null;
+
+  useEffect(() => {
+    setCueSetIndex(0);
+  }, [current?.id, mode]);
+
+  const cueSets = useMemo(() => (current ? buildCueSets(current) : []), [current]);
+  const activeCueSet = cueSets.length ? cueSets[cueSetIndex % cueSets.length] : null;
 
   const dragStyle = useMemo(() => {
     const rotate = drag.x / 20;
@@ -257,6 +169,7 @@ export default function App() {
     if (!dragRef.current.isDragging || startedInScrollableArea.current || isAnimatingSwipe.current) {
       return;
     }
+
     const dx = x - start.current.x;
     const dy = y - start.current.y;
 
@@ -287,8 +200,7 @@ export default function App() {
 
   const finalizeDrag = (endX, endY) => {
     const liveDrag = dragRef.current;
-    if (!liveDrag.isDragging) return;
-    if (isAnimatingSwipe.current) return;
+    if (!liveDrag.isDragging || isAnimatingSwipe.current) return;
 
     let dx = liveDrag.x;
     let dy = liveDrag.y;
@@ -308,7 +220,7 @@ export default function App() {
     }
 
     const elapsed = Math.max(1, swipeMeta.current.lastTime - swipeMeta.current.startTime);
-    const velocityX = (swipeMeta.current.lastX - start.current.x) / elapsed; // px/ms
+    const velocityX = (swipeMeta.current.lastX - start.current.x) / elapsed;
     const shouldSwipe = Math.abs(dx) >= SWIPE_THRESHOLD || Math.abs(velocityX) > 0.45;
 
     if (!shouldSwipe || filteredPoses.length === 0) {
@@ -316,7 +228,7 @@ export default function App() {
       return;
     }
 
-    const direction = dx < 0 ? 1 : -1; // left = next, right = previous
+    const direction = dx < 0 ? 1 : -1;
     const offscreen = (typeof window !== "undefined" ? window.innerWidth : 420) * 1.15;
     isAnimatingSwipe.current = true;
     const next = { x: direction === 1 ? -offscreen : offscreen, y: 0, isDragging: false };
@@ -345,6 +257,7 @@ export default function App() {
     if (event.pointerType === "touch") return;
     updateDrag(event.clientX, event.clientY, event);
   };
+
   const handlePointerUp = (event) => {
     if (event?.pointerType === "touch") return;
     finalizeDrag(event?.clientX, event?.clientY);
@@ -393,69 +306,19 @@ export default function App() {
     if (!current) return null;
     if (quizType === "sanskrit") return current.sanskrit;
     if (quizType === "breath") return current.breath;
+    if (activeCueSet?.cues?.length) return activeCueSet.cues.join(" • ");
     return current.teachingCues.general.join(" ");
-  }, [current, quizType]);
-
-  const toggleTheme = () => {
-    setThemePreference(activeTheme === "night" ? "day" : "night");
-  };
+  }, [current, quizType, activeCueSet]);
 
   return (
     <div className="phone-shell">
       <div className="app">
-        <header className="top-bar">
-          <div className="brand">
-            <div className="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <path d="M32 8c5 7 5 13 0 20-5-7-5-13 0-20Z" />
-                <path d="M15 23c8 1 13 4 17 11-8 0-14-3-17-11Z" />
-                <path d="M49 23c-3 8-9 11-17 11 4-7 10-10 17-11Z" />
-                <path d="M20 43c6-4 12-4 18 0-6 6-12 6-18 0Z" />
-                <path d="M44 43c-6-4-12-4-18 0 6 6 12 6 18 0Z" />
-              </svg>
-            </div>
-            <div className="brand-text">
-              <p className="eyebrow">Sacred Study Flow</p>
-              <h1 className="logo-wordmark">
-                <span className="logo-my">My</span>
-                <span className="logo-lotus-inline" aria-hidden="true">
-                  <svg viewBox="0 0 32 32">
-                    <path d="M16 5.5c2.4 3.2 2.5 6.1 0 9.3-2.4-3.2-2.3-6.1 0-9.3Z" />
-                    <path d="M7.2 13.4c3.9.2 6.4 1.8 8.8 5-4-.1-6.6-1.8-8.8-5Z" />
-                    <path d="M24.8 13.4c-2.2 3.2-4.8 4.9-8.8 5 2.4-3.2 4.9-4.8 8.8-5Z" />
-                    <path d="M11 22.1c1.8-1.2 3.5-1.6 5-1.6s3.2.4 5 1.6c-1.7 2-3.4 2.9-5 2.9s-3.3-.9-5-2.9Z" />
-                  </svg>
-                </span>
-                <span className="logo-name">Sadhana</span>
-              </h1>
-            </div>
-          </div>
-          <div className="top-actions">
-            <div className="progress">
-              <span>{String(hasPoses ? index + 1 : 0).padStart(2, "0")}</span>
-              <span className="divider">/</span>
-              <span>{String(filteredPoses.length).padStart(2, "0")}</span>
-            </div>
-            <button
-              className="theme-toggle"
-              type="button"
-              onClick={toggleTheme}
-              aria-label={activeTheme === "night" ? "Switch to day mode" : "Switch to night mode"}
-              title={activeTheme === "night" ? "Switch to day mode" : "Switch to night mode"}
-            >
-              {activeTheme === "night" ? (
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="4.4" />
-                  <path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.2 5.2l1.8 1.8M17 17l1.8 1.8M18.8 5.2L17 7M7 17l-1.8 1.8" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.4 14.9A8.4 8.4 0 1 1 9.1 3.6a7.1 7.1 0 1 0 11.3 11.3Z" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </header>
+        <AppHeader
+          activePage="study"
+          progressText={`${String(hasPoses ? index + 1 : 0).padStart(2, "0")}/${String(
+            filteredPoses.length
+          ).padStart(2, "0")}`}
+        />
 
         <div className="content-layout">
           <aside className="control-panel">
@@ -602,9 +465,7 @@ export default function App() {
                           <h2>{current.english}</h2>
                           {mode === "study" && <p className="sanskrit">{current.sanskrit}</p>}
                         </div>
-                        <div className="chip">
-                          {mode === "study" ? "Study" : `${current.cues.length} cues`}
-                        </div>
+                        <div className="chip">{mode === "study" ? "Study" : `${current.alignmentCues.length} cues`}</div>
                       </div>
 
                       <div className="meta-row">
@@ -621,30 +482,40 @@ export default function App() {
                       </div>
 
                       {mode === "study" ? (
-                        <ul className="cues study-snapshot">
-                          {current.cues.slice(0, 2).map((cue) => (
-                            <li key={cue} className="study-line">
-                              Align: {cue}
-                            </li>
-                          ))}
-                          {current.teachingCues.general?.[0] && (
-                            <li className="study-line">Teach: {current.teachingCues.general[0]}</li>
-                          )}
-                          {current.teachingCues.beginner?.[0] && (
-                            <li className="study-line">Beginner: {current.teachingCues.beginner[0]}</li>
-                          )}
-                          {current.teachingCues.limitedMobility?.[0] && (
-                            <li className="study-line">
-                              Mobility: {current.teachingCues.limitedMobility[0]}
-                            </li>
-                          )}
-                        </ul>
+                        <section className="cue-section">
+                          <div className="cue-header">
+                            <div>
+                              <p className="card-label">Cue Lens</p>
+                              <p className="cue-lens-title">{activeCueSet?.title || "Teaching Lens"}</p>
+                            </div>
+                            <button
+                              type="button"
+                              className="cue-refresh"
+                              aria-label="Show next cue set"
+                              title="Show next cue set"
+                              onClick={() => setCueSetIndex((value) => (value + 1) % 3)}
+                            >
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20 12a8 8 0 1 1-2.3-5.7" />
+                                <path d="M20 4v6h-6" />
+                              </svg>
+                            </button>
+                          </div>
+                          <ul className="cues study-snapshot">
+                            {(activeCueSet?.cues || []).map((cue) => (
+                              <li key={cue} className="study-line">
+                                {cue}
+                              </li>
+                            ))}
+                          </ul>
+                          <p className="cue-note">Tap refresh to rotate through 3 teacher cue lenses.</p>
+                        </section>
                       ) : (
                         <div className="quiz-panel">
                           <p className="quiz-question">
                             {quizType === "sanskrit" && "What is the Sanskrit name for this pose?"}
                             {quizType === "breath" && "Is this pose inhale or exhale focused?"}
-                            {quizType === "cues" && "What is one teaching cue for this pose?"}
+                            {quizType === "cues" && "Name one direct cue you would teach."}
                           </p>
                           {quizRevealed ? (
                             <p className="quiz-answer">{quizAnswer}</p>
@@ -678,7 +549,7 @@ export default function App() {
               >
                 Previous
               </button>
-              <div className="hint">Swipe left or right to study</div>
+              <div className="hint">Swipe or use arrows to study</div>
               <button
                 className="solid"
                 type="button"
