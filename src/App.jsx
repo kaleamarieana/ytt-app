@@ -420,30 +420,29 @@ export default function App() {
                     onTouchEnd={handleTouchEnd}
                     onTouchCancel={handleTouchEnd}
                   >
-                    <div className="edge-taps">
-                      <button
-                        className="side-nav prev"
-                        type="button"
-                        aria-label="Previous pose"
-                        onClick={() => {
-                          setIndex((value) => clampIndex(value - 1, filteredPoses.length));
-                          setQuizRevealed(false);
-                          triggerHaptic();
-                        }}
-                      />
-                      <button
-                        className="side-nav next"
-                        type="button"
-                        aria-label="Next pose"
-                        onClick={() => {
-                          setIndex((value) => clampIndex(value + 1, filteredPoses.length));
-                          setQuizRevealed(false);
-                          triggerHaptic();
-                        }}
-                      />
-                    </div>
-
                     <div className="card-media">
+                      <div className="edge-taps">
+                        <button
+                          className="side-nav prev"
+                          type="button"
+                          aria-label="Previous pose"
+                          onClick={() => {
+                            setIndex((value) => clampIndex(value - 1, filteredPoses.length));
+                            setQuizRevealed(false);
+                            triggerHaptic();
+                          }}
+                        />
+                        <button
+                          className="side-nav next"
+                          type="button"
+                          aria-label="Next pose"
+                          onClick={() => {
+                            setIndex((value) => clampIndex(value + 1, filteredPoses.length));
+                            setQuizRevealed(false);
+                            triggerHaptic();
+                          }}
+                        />
+                      </div>
                       <PoseImage src={current.image} alt={current.english} poseId={current.id} />
                     </div>
                     <div className={`card-body ${mode === "study" ? "study-body" : ""}`}>

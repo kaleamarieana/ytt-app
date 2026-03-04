@@ -437,6 +437,7 @@ body {
 }
 
 .card-media {
+  position: relative;
   padding: 16px 16px 0;
 }
 
