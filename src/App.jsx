@@ -52,7 +52,7 @@ const getTimeBasedTheme = () => {
   return currentHour >= 6 && currentHour < 18 ? "day" : "night";
 };
 
-const inferEnterBreath = (pose) => {
+const inferBreathCue = (pose) => {
   const name = `${pose.englishName} ${pose.sanskritName}`.toLowerCase();
   if (EXHALE_KEYWORDS.some((keyword) => name.includes(keyword))) return "Exhale";
   if (EXHALE_CATEGORIES.has(pose.category)) return "Exhale";
@@ -133,17 +133,7 @@ export default function App() {
     () =>
       flashcardData.poses.map((pose) => ({
         ...pose,
-        ...(() => {
-          const enter = inferEnterBreath(pose);
-          const exit = enter === "Inhale" ? "Exhale" : "Inhale";
-          return {
-            breath: {
-              enter,
-              hold: pose.breath?.hold || "Steady breathing",
-              exit,
-            },
-          };
-        })(),
+        breath: inferBreathCue(pose),
         english: pose.englishName,
         sanskrit: pose.sanskritName,
         image: pose.image.url || `/images/poses/${pose.image.filename}`,
@@ -402,9 +392,7 @@ export default function App() {
   const quizAnswer = useMemo(() => {
     if (!current) return null;
     if (quizType === "sanskrit") return current.sanskrit;
-    if (quizType === "breath") {
-      return `Enter: ${current.breath.enter} • Hold: ${current.breath.hold} • Exit: ${current.breath.exit}`;
-    }
+    if (quizType === "breath") return current.breath;
     return current.teachingCues.general.join(" ");
   }, [current, quizType]);
 
@@ -610,9 +598,7 @@ export default function App() {
 
                       <div className="meta-row">
                         {mode === "study" ? (
-                          <div className="meta-pill">
-                            Breath: {current.breath.enter} / {current.breath.hold} / {current.breath.exit}
-                          </div>
+                          <div className="meta-pill">Breath: {current.breath}</div>
                         ) : (
                           <div className="meta-pill">Difficulty: {current.difficulty}</div>
                         )}
@@ -646,7 +632,7 @@ export default function App() {
                         <div className="quiz-panel">
                           <p className="quiz-question">
                             {quizType === "sanskrit" && "What is the Sanskrit name for this pose?"}
-                            {quizType === "breath" && "What is the breath timing for this pose?"}
+                            {quizType === "breath" && "Is this pose inhale or exhale focused?"}
                             {quizType === "cues" && "What is one teaching cue for this pose?"}
                           </p>
                           {quizRevealed ? (
